@@ -1,0 +1,19 @@
+{
+  "test": "testavimas",
+  "dataLoadingError": "Įvyko klaida!",
+  "tryAgainText": "Bandyti dar kartą",
+  "greetingData": {
+    "message": {
+      "message": "Labas! Džiaugiuosi, jog parsisiuntei šią aplikaciją. Šiame kūrybos kampelyje gali plačiau susipažinti su manimi bei peržiūrėti mano atliktus darbus. Malonaus skaitymo! :)",
+      "time": "ką tik"
+    },
+    "startReading": "Skaityti toliau",
+    "switcherCheckBoxText": "Daugiau nerodyti šio lango"
+  },
+  "pageTitle": {
+    "about": "Apie mane",
+    "portfolio": "Darbai",
+    "contact": "Kontaktai",
+    "settings": "Nustatymai"
+  }
+}

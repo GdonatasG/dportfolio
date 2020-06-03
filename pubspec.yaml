@@ -1,0 +1,73 @@
+name: dportfolio
+description: My portfolio app
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^0.1.3
+  shared_preferences: ^0.5.7+3
+  flutter_bloc: ^4.0.0
+  provider: ^4.1.1
+  easy_localization: ^2.3.2
+  flutter_native_splash: ^0.1.9
+  # color generator from hex
+  supercharged: ^1.6.0
+  # advanced stream management
+  rxdart: ^0.24.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter_native_splash:
+  color: ff5252
+  image: assets/images/logo.png
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  # To add assets to your application, add an assets section, like this:
+  assets:
+    - assets/locale/
+    - assets/images/
+  #   - images/a_dot_ham.jpeg
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+    - family: Thrones
+      fonts:
+        - asset: fonts/Thrones.ttf
+    - family: Billabong
+      fonts:
+        - asset: fonts/Billabong.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages

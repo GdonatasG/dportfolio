@@ -1,0 +1,19 @@
+{
+  "test": "testing",
+  "dataLoadingError": "An error occured while loading data!",
+  "tryAgainText": "Try again",
+  "greetingData": {
+    "message": {
+      "message": "Message here!",
+      "time": "now"
+    },
+    "startReading": "Start reading",
+    "switcherCheckBoxText" : "Do not show this window again"
+  },
+  "pageTitle": {
+    "about": "About me",
+    "portfolio": "Portfolio",
+    "contact": "Contact me",
+    "settings": "Settings"
+  }
+}
