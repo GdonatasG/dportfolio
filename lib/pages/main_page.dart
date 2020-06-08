@@ -1,15 +1,16 @@
 import 'package:dportfolio/pages/about_me_page.dart';
 import 'package:dportfolio/pages/contacts_page.dart';
 import 'package:dportfolio/pages/portfolio_page.dart';
-import 'package:dportfolio/pages/settings_page.dart';
+import 'package:dportfolio/utils/constants.dart';
 import 'package:dportfolio/utils/locale_keys.g.dart';
-import 'package:dportfolio/utils/theme.dart';
+import 'package:dportfolio/utils/themes/app_custom_dimensions.dart';
+import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:preferences/preference_service.dart';
 
-import 'language_page.dart';
+import 'settings/settings_page.dart';
 
 class MainPage extends StatefulWidget {
   MainPage({Key key}) : super(key: key);
@@ -31,12 +32,13 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        statusBarColor: AppColors.primary,
-        statusBarIconBrightness: Brightness.dark));
+        statusBarColor: Theme.of(context).primaryColor,
+        statusBarIconBrightness: _getStatusBarIconBrightness()));
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
         bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Theme.of(context).primaryColor,
           showUnselectedLabels: true,
           currentIndex: _selectedPage,
           selectedLabelStyle: Theme.of(context)
@@ -51,19 +53,27 @@ class _MainPageState extends State<MainPage> {
           items: [
             BottomNavigationBarItem(
               icon: Icon(Icons.person_pin),
-              title: Text(LocaleKeys.PAGE_TITLE_ABOUT.tr()),
+              title: Text(
+                context.getString(LocaleKeys.PAGE_TITLE_ABOUT),
+              ),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.code),
-              title: Text(LocaleKeys.PAGE_TITLE_PORTFOLIO.tr()),
+              title: Text(
+                context.getString(LocaleKeys.PAGE_TITLE_PORTFOLIO),
+              ),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.mail),
-              title: Text(LocaleKeys.PAGE_TITLE_CONTACT.tr()),
+              title: Text(
+                context.getString(LocaleKeys.PAGE_TITLE_CONTACT),
+              ),
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings),
-              title: Text(LocaleKeys.PAGE_TITLE_SETTINGS.tr()),
+              title: Text(
+                context.getString(LocaleKeys.PAGE_TITLE_SETTINGS),
+              ),
             ),
           ],
         ),
@@ -73,6 +83,15 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
     );
+  }
+
+  Brightness _getStatusBarIconBrightness() {
+    String currentTheme = PrefService.getString(Constants.PREFERENCE_UI_THEME);
+    if (currentTheme == Constants.PREFERENCES_UI_THEME_LIGHT)
+      return Brightness.dark;
+    else if (currentTheme == Constants.PREFERENCES_UI_THEME_DARK)
+      return Brightness.light;
+    return Brightness.light;
   }
 
   _generateBottomBarPages() {

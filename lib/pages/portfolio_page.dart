@@ -1,4 +1,4 @@
-import 'package:dportfolio/utils/locale_keys.g.dart';
+import 'package:dportfolio/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class _PortfolioPageState extends State<PortfolioPage> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Text(
-              LocaleKeys.APP_NAME,
+              Constants.APP_NAME,
               style: Theme.of(context).textTheme.headline5,
             )
           ],

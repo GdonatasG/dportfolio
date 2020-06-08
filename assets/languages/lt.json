@@ -1,5 +1,4 @@
 {
-  "test": "testavimas",
   "dataLoadingError": "Įvyko klaida!",
   "tryAgainText": "Bandyti dar kartą",
   "greetingData": {
@@ -15,5 +14,21 @@
     "portfolio": "Darbai",
     "contact": "Kontaktai",
     "settings": "Nustatymai"
+  },
+  "settingsPage": {
+    "about_application": "Aplikacija",
+    "version": "Versija: {version}",
+    "creators": "Kūrėjai: {creators}",
+    "built_with": "Aplikacija sukurta naudojantis Flutter karkasu",
+    "personalization": "Išvaizda",
+    "themeName": {
+      "theme_light": "Šviesi tema",
+      "theme_dark": "Tamsi tema"
+    },
+    "language": {
+      "language": "Kalba",
+      "english": "Anglų",
+      "lithuanian": "Lietuvių"
+    }
   }
 }

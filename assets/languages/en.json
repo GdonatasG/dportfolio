@@ -1,0 +1,34 @@
+{
+  "dataLoadingError": "An error occured while loading data!",
+  "tryAgainText": "Try again",
+  "greetingData": {
+    "message": {
+      "message": "Hello! Thank you for downloading this application. Here you can get to know me better and take a look at my portfolio. Have fun reading!",
+      "time": "now"
+    },
+    "startReading": "Start reading",
+    "switcherCheckBoxText": "Do not show this window again"
+  },
+  "pageTitle": {
+    "about": "About me",
+    "portfolio": "Portfolio",
+    "contact": "Contact me",
+    "settings": "Settings"
+  },
+  "settingsPage": {
+    "about_application": "Application",
+    "version": "Version: {version}",
+    "creators": "Creators: {creators}",
+    "built_with": "Application built with Flutter",
+    "personalization": "Personalization",
+    "themeName": {
+      "theme_light": "Theme Light",
+      "theme_dark": "Theme Dark"
+    },
+    "language": {
+      "language": "Language",
+      "english": "English",
+      "lithuanian": "Lithuanian"
+    }
+  }
+}
