@@ -1,7 +1,5 @@
-import 'dart:developer';
-
+import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class LanguageView extends StatelessWidget {
   @override
@@ -37,16 +35,20 @@ class LanguageView extends StatelessWidget {
               ),
             ),
             buildSwitchListTileMenuItem(
-                context: context,
-                title: 'English',
-                subtitle: 'English',
-                locale: EasyLocalization.of(context).supportedLocales[0]),
+              context: context,
+              title: 'English',
+              subtitle: 'English',
+              locale: Locale('en', 'US'),
+              //locale: EasyLocalization.of(context).supportedLocales[0]
+            ),
             buildDivider(),
             buildSwitchListTileMenuItem(
-                context: context,
-                title: 'Lithuanian',
-                subtitle: 'Lithuanian',
-                locale: EasyLocalization.of(context).supportedLocales[1]),
+              context: context,
+              title: 'Lithuanian',
+              subtitle: 'Lithuanian',
+              locale: Locale('lt', 'LT'),
+              //locale: EasyLocalization.of(context).supportedLocales[1]
+            ),
             buildDivider(),
           ],
         ),
@@ -81,8 +83,8 @@ class LanguageView extends StatelessWidget {
             subtitle,
           ),
           onTap: () {
-            log(locale.toString(), name: toString());
-            context.locale = locale; //BuildContext extension method
+            //context.locale = locale; //BuildContext extension method
+            EzLocalizationBuilder.of(context).changeLocale(locale);
             //EasyLocalization.of(context).locale = locale;
             Navigator.pop(context);
           }),

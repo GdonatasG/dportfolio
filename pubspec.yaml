@@ -1,5 +1,5 @@
 name: dportfolio
-description: My portfolio app
+description: dportfolio
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -20,12 +20,18 @@ dependencies:
   shared_preferences: ^0.5.7+3
   flutter_bloc: ^4.0.0
   provider: ^4.1.1
-  easy_localization: ^2.3.2
+  #easy_localization: ^2.3.2
+  ez_localization: ^0.3.0
+  flutter_localizations:
+    sdk: flutter
   flutter_native_splash: ^0.1.9
   # color generator from hex
   supercharged: ^1.6.0
   # advanced stream management
   rxdart: ^0.24.1
+  # preferences for settings page
+  preferences: ^5.2.0
+  dynamic_theme: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -48,7 +54,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/locale/
+    - assets/languages/
     - assets/images/
   #   - images/a_dot_ham.jpeg
   fonts:

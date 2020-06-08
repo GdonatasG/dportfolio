@@ -1,28 +1,33 @@
-import 'dart:developer';
-
 import 'package:dportfolio/data/model/Message.dart';
 import 'package:dportfolio/data/repository/greeting_data_repository_impl.dart';
 import 'package:dportfolio/pages/main_page.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:dportfolio/utils/constants.dart';
+import 'package:dportfolio/utils/extensions.dart';
+import 'package:dportfolio/utils/themes/app_colors.dart';
+import 'package:dportfolio/utils/themes/app_theme_dark.dart';
+import 'package:dportfolio/utils/themes/greeting_page_theme.dart';
+import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:preferences/preferences.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'bloc/greeting_data/greeting_data_bloc_export.dart';
-import 'bloc/layout_switcher/layout_switcher_bloc_export.dart';
 import 'utils/locale_keys.g.dart';
-import 'utils/theme.dart';
+import 'utils/themes/app_custom_widgets.dart';
+import 'utils/themes/app_theme_light.dart';
+import 'utils/themes/theme_changer.dart';
 
-void main() {
+main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PrefService.init(prefix: 'pref_');
+
+  //PrefService.setDefaultValues({'user_description': 'This is my description!'});
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarColor: AppColors.greetingBackground));
-  runApp(EasyLocalization(
-      supportedLocales: [Locale('en', 'US'), Locale('lt', 'LT')],
-      path: "assets/locale",
-      preloaderColor: AppColors.greetingBackground,
-      //preloaderWidget: CustomPreloaderWidget(),
-      child: Application()));
+  runApp(Application());
 }
 
 class Application extends StatefulWidget {
@@ -32,15 +37,12 @@ class Application extends StatefulWidget {
 }
 
 class _ApplicationState extends State<Application> {
-  LayoutSwitcherBloc _layoutSwitcherBloc;
   GreetingDataBloc _greetingDataBloc;
   final GreetingDataRepositoryImpl greetingDataRepositoryImpl =
       GreetingDataRepositoryImpl();
 
   @override
   void initState() {
-    _layoutSwitcherBloc = LayoutSwitcherBloc();
-    _layoutSwitcherBloc.add(GetGreetingValue());
     _greetingDataBloc = GreetingDataBloc(
         greetingDataRepositoryImpl: greetingDataRepositoryImpl);
     super.initState();
@@ -48,47 +50,48 @@ class _ApplicationState extends State<Application> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: appTheme,
-      home: SafeArea(
-        child: Scaffold(
-          body: BlocListener<LayoutSwitcherBloc, LayoutSwitcherState>(
-            bloc: _layoutSwitcherBloc,
-            listener: (context, state) {
-              // listener
-            },
-            child: BlocBuilder<LayoutSwitcherBloc, LayoutSwitcherState>(
-              bloc: _layoutSwitcherBloc,
-              builder: (context, state) {
-                if (state is GreetingValueLoading)
-                  return AppCustomWidgets.loadingWidgetGreetingColor;
-                else if (state is GreetingValueLoaded) {
-                  return state.showGreeting
-                      ? _buildGreetingLayout(context)
-                      : MainPage();
-                } else if (state is GreetingValueUpdated) {
-                  WidgetsBinding.instance.addPostFrameCallback((_) {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => MainPage()));
-                  });
-                  return Container();
-                } else if (state is GreetingValueError) {
-                  return _showErrorLayout(context);
-                } else
-                  return Container(
-                    color: AppColors.greetingBackground,
-                  );
-              },
-            ),
-          ),
-        ),
+    return EzLocalizationBuilder(
+      delegate: EzLocalizationDelegate(
+        supportedLocales: [
+          Locale(Constants.LANG_EN),
+          Locale(Constants.LANG_LT)
+        ],
+        locale: getCurrentLocale(context),
       ),
+      builder: (context, localizationDelegate) {
+        return ChangeNotifierProvider<ThemeChanger>(
+            create: (_) => ThemeChanger(_setStartingTheme()),
+            child: MaterialApp(
+              //locale: getCurrentLocale(context),
+              localizationsDelegates:
+                  localizationDelegate.localizationDelegates,
+              supportedLocales: localizationDelegate.supportedLocales,
+              localeResolutionCallback:
+                  localizationDelegate.localeResolutionCallback,
+              debugShowCheckedModeBanner: false,
+              title: Constants.APP_NAME,
+              theme: _setStartingTheme(),
+              home: SafeArea(
+                child: Scaffold(body: _setStartingPage(context)),
+              ),
+            ));
+      },
     );
+  }
+
+  _setStartingPage(BuildContext context) {
+    bool showGreeting =
+        PrefService.getBool(Constants.PREFERENCE_SHOW_GREETING) ?? true;
+    return showGreeting ? _buildGreetingLayout(context) : MainPage();
+  }
+
+  _setStartingTheme() {
+    String currentTheme = PrefService.getString(Constants.PREFERENCE_UI_THEME);
+    if (currentTheme == null ||
+        currentTheme == Constants.PREFERENCES_UI_THEME_LIGHT)
+      return appThemeLight;
+    else
+      return appThemeDark;
   }
 
   _showErrorLayout(BuildContext context) {
@@ -98,26 +101,23 @@ class _ApplicationState extends State<Application> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            AppCustomWidgets.logoWidget,
-            SizedBox(
-              height: 15,
-            ),
             Text(
-              LocaleKeys.DATA_LOADING_ERROR.tr(),
+              context.getString(LocaleKeys.DATA_LOADING_ERROR),
               style: Theme.of(context).textTheme.headline4,
             ),
             SizedBox(
               height: 10,
             ),
+            // data reload button
             FlatButton(
-              shape: AppCustomWidgets.customShapeForFlatButton(),
-              textColor: AppColors.primary,
+              shape: AppCustomWidgets.customLightShapeForFlatButton(),
+              textColor: AppColors.lightestGrey,
               onPressed: () {
-                _layoutSwitcherBloc.add(GetGreetingValue());
+                _greetingDataBloc.add(GetGreetingMessage());
               },
               child: Text(
-                LocaleKeys.TRY_AGAIN_TEXT.tr(),
-                style: Theme.of(context).textTheme.headline3,
+                context.getString(LocaleKeys.TRY_AGAIN_TEXT),
+                style: greetingTheme.textTheme.headline3,
               ),
             )
           ],
@@ -137,7 +137,7 @@ class _ApplicationState extends State<Application> {
         bloc: _greetingDataBloc,
         builder: (context, state) {
           if (state is GreetingDataLoading)
-            return AppCustomWidgets.loadingWidgetGreetingColor;
+            return _showLoadingLayout();
           else if (state is GreetingMessageLoaded)
             return _showGreetingLayout(context, state.message);
           else if (state is GreetingDataError)
@@ -184,6 +184,15 @@ class _ApplicationState extends State<Application> {
     );
   }
 
+  _showLoadingLayout() {
+    return Container(
+      color: AppColors.greetingBackground,
+      child: Center(
+        child: AppCustomWidgets.customProgressIndicatorDark,
+      ),
+    );
+  }
+
   _msgLayout(BuildContext context, Message greetingMessage) {
     return Container(
       margin: EdgeInsets.only(top: 30),
@@ -212,14 +221,14 @@ class _ApplicationState extends State<Application> {
                       Text(
                         greetingMessage.author,
                         maxLines: 1,
-                        style: Theme.of(context).textTheme.headline2,
+                        style: greetingTheme.textTheme.headline2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       SizedBox(height: 5.0),
                       Text(
-                        greetingMessage.message.tr(),
+                        context.getString(greetingMessage.message),
                         overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.headline4,
+                        style: greetingTheme.textTheme.headline4,
                         maxLines: 6,
                       )
                     ],
@@ -236,10 +245,8 @@ class _ApplicationState extends State<Application> {
                 Container(
                     alignment: Alignment.topRight,
                     child: Text(
-                      greetingMessage.time.tr(),
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline4
+                      context.getString(greetingMessage.time),
+                      style: greetingTheme.textTheme.headline4
                           .copyWith(fontSize: 12.5),
                     ))
               ],
@@ -255,26 +262,29 @@ class _ApplicationState extends State<Application> {
       margin: EdgeInsets.only(top: 10),
       child: Column(
         children: [
+          // MainPage loading button
           FlatButton(
-            shape: AppCustomWidgets.customShapeForFlatButton(),
-            textColor: AppColors.primary,
+            shape: AppCustomWidgets.customLightShapeForFlatButton(),
+            textColor: AppColors.lightestGrey,
             child: Text(
-              LocaleKeys.GREETING_DATA_START_READING.tr(),
-              style: Theme.of(context).textTheme.headline3,
+              context.getString(LocaleKeys.GREETING_DATA_START_READING),
+              style: greetingTheme.textTheme.headline3,
             ),
             onPressed: () {
-              _layoutSwitcherBloc.add(UpdateGreetingValue());
+              _greetingDataBloc.updateGreetingPreference();
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => MainPage()));
+              });
             },
           ),
+          // layout switcher checkbox
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                LocaleKeys.GREETING_DATA_SWITCHER_CHECKBOX.tr(),
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4
-                    .copyWith(fontSize: 16),
+                context.getString(LocaleKeys.GREETING_DATA_SWITCHER_CHECKBOX),
+                style: greetingTheme.textTheme.headline4.copyWith(fontSize: 16),
                 textAlign: TextAlign.center,
               ),
               SizedBox(
@@ -290,14 +300,14 @@ class _ApplicationState extends State<Application> {
 
   _layoutSwitcherCheckbox() {
     return StreamBuilder(
-      stream: _layoutSwitcherBloc.checkboxStream,
+      stream: _greetingDataBloc.checkboxStream,
       builder: (BuildContext context, snapshot) {
         return Checkbox(
           value: snapshot.hasData ? snapshot.data : false,
           activeColor: AppColors.greetingBackground,
           checkColor: AppColors.textColorDark,
           onChanged: (value) {
-            _layoutSwitcherBloc.updateCheckboxValue(value);
+            _greetingDataBloc.updateCheckboxValue(value);
           },
         );
       },
@@ -306,17 +316,7 @@ class _ApplicationState extends State<Application> {
 
   @override
   void dispose() {
-    _layoutSwitcherBloc.close();
     _greetingDataBloc.close();
     super.dispose();
-  }
-}
-
-class CustomPreloaderWidget extends StatelessWidget {
-  const CustomPreloaderWidget({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCustomWidgets.loadingWidgetGreetingColor;
   }
 }
