@@ -30,5 +30,23 @@
       "english": "Anglų",
       "lithuanian": "Lietuvių"
     }
+  },
+  "contactsPage": {
+    "hire_me": "Rinkis mane!",
+    "tabs": {
+      "email_me": "Rašyti laišką",
+      "other_platforms": "Kitos platformos",
+      "email": {
+        "recipient": "Gavėjas",
+        "subject": "Tema",
+        "message": "Žinutė",
+        "send": "Siųsti",
+        "validations": {
+          "error_subject": "Per trumpas pavadinimas!",
+          "error_message": "Per trumpa žinutė!"
+        },
+        "sent_error": "Įvyko klaida! Bandykite dar."
+      }
+    }
   }
 }

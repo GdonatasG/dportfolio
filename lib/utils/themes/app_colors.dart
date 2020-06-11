@@ -11,8 +11,9 @@ class AppColors {
   static Color lightestGrey = Colors.grey[100];
   static Color lighterGrey = Colors.grey[200];
   static Color lightGrey = Colors.grey[300];
-  static Color darkerDark = Colors.grey[400];
-  static Color textColorDark = Colors.grey[800];
+  static Color darkerGrey = Colors.grey[400];
+  static Color darkestGrey = Colors.grey.shade900;
+  static Color textColorDark = Colors.grey.shade800;
   static Color textColorLight = Colors.grey[100];
-  static Color textColorOrange = Colors.orange;
+  static Color textColorOrange = Colors.orange[700];
 }

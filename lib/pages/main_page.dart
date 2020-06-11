@@ -1,9 +1,11 @@
 import 'package:dportfolio/pages/about_me_page.dart';
-import 'package:dportfolio/pages/contacts_page.dart';
+import 'file:///C:/Users/Donatas/AndroidStudioProjects/d_portfolio/lib/pages/contacts/contacts_page.dart';
 import 'package:dportfolio/pages/portfolio_page.dart';
 import 'package:dportfolio/utils/constants.dart';
 import 'package:dportfolio/utils/locale_keys.g.dart';
 import 'package:dportfolio/utils/themes/app_custom_dimensions.dart';
+import 'package:dportfolio/utils/themes/app_theme_dark.dart';
+import 'package:dportfolio/utils/themes/app_theme_light.dart';
 import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,18 +39,15 @@ class _MainPageState extends State<MainPage> {
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Theme.of(context).primaryColor,
           showUnselectedLabels: true,
           currentIndex: _selectedPage,
-          selectedLabelStyle: Theme.of(context)
-              .textTheme
-              .headline4
-              .copyWith(fontSize: AppCustomDimensions.bottomBarItemTitleSize),
-          unselectedLabelStyle: Theme.of(context)
-              .textTheme
-              .headline4
-              .copyWith(fontSize: AppCustomDimensions.bottomBarItemTitleSize),
+          selectedLabelStyle: Theme.of(context).textTheme.headline4.copyWith(
+              fontSize: AppCustomDimensions.BOTTOM_BAR_ITEM_TITLE_SIZE),
+          unselectedLabelStyle: Theme.of(context).textTheme.headline4.copyWith(
+              fontSize: AppCustomDimensions.BOTTOM_BAR_ITEM_TITLE_SIZE),
           onTap: _onItemTapped,
           items: [
             BottomNavigationBarItem(
@@ -77,9 +76,19 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
         ),
-        body: IndexedStack(
-          index: _selectedPage,
-          children: pageList,
+        body: GestureDetector(
+          // removing input focus when tapping outside input area
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus &&
+                currentFocus.focusedChild != null) {
+              currentFocus.focusedChild.unfocus();
+            }
+          },
+          child: IndexedStack(
+            index: _selectedPage,
+            children: pageList,
+          ),
         ),
       ),
     );

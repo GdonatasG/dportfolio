@@ -30,5 +30,23 @@
       "english": "English",
       "lithuanian": "Lithuanian"
     }
+  },
+  "contactsPage": {
+    "hire_me": "Hire me!",
+    "tabs": {
+      "email_me": "Email me",
+      "other_platforms": "Other platforms",
+      "email": {
+        "recipient": "Recipient",
+        "subject": "Subject",
+        "message": "Message",
+        "send": "Send",
+        "validations": {
+          "error_subject": "Subject too short!",
+          "error_message": "Message too short!"
+        },
+        "sent_error": "Something went wrong! Try again."
+      }
+    }
   }
 }

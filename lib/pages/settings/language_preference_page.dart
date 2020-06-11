@@ -25,6 +25,7 @@ class _LanguagePageState extends State<LanguagePage> {
   Widget build(BuildContext context) {
     _initLanguage(context);
     return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text(widget.title),
       ),

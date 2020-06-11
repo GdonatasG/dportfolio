@@ -3,10 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 final ThemeData appThemeDark = ThemeData(
-    primaryColor: Colors.grey[800],
-    primaryColorLight: AppColors.lighterGrey,
-    primaryColorDark: Colors.grey[400],
-    accentColor: Colors.grey[800],
+    primaryColor: AppColors.textColorDark,
+    primaryColorLight: AppColors.textColorLight,
+    primaryColorDark: AppColors.textColorDark,
+    accentColor: AppColors.textColorOrange,
+    backgroundColor: AppColors.darkestGrey,
+    unselectedWidgetColor: AppColors.textColorLight,
+    cursorColor: AppColors.textColorLight,
+    iconTheme: IconThemeData(color: AppColors.textColorLight),
+    indicatorColor: AppColors.textColorOrange,
     textTheme: TextTheme(
         headline5: TextStyle(
             fontFamily: "Billabong",
@@ -15,13 +20,15 @@ final ThemeData appThemeDark = ThemeData(
         headline2: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.bold,
-            color: AppColors.textColorDark),
+            color: AppColors.textColorLight),
         headline3: TextStyle(
           fontSize: 15,
-          color: AppColors.textColorOrange,
+          color: AppColors.textColorLight,
         ),
         headline4: TextStyle(
-            fontFamily: "Roboto", fontSize: 14, color: AppColors.textColorDark),
+            fontFamily: "Roboto",
+            fontSize: 14,
+            color: AppColors.textColorLight),
         headline6: TextStyle(
             fontFamily: "Billabong",
             fontSize: 20,
@@ -33,10 +40,24 @@ final ThemeData appThemeDark = ThemeData(
         selectedItemColor: AppColors.textColorOrange,
         unselectedIconTheme: IconThemeData(size: 22),
         selectedIconTheme: IconThemeData(size: 22)),
+    tabBarTheme: TabBarTheme(
+        labelColor: AppColors.textColorOrange,
+        unselectedLabelColor: AppColors.textColorLight),
     dividerTheme: DividerThemeData(
-        color: AppColors.textColorDark, space: 0.5, thickness: 0.2),
+        color: AppColors.textColorLight, space: 0.5, thickness: 0.2),
     buttonTheme: ButtonThemeData(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
-          side: BorderSide(color: AppColors.textColorDark, width: 1.2)),
-    ));
+          side: BorderSide(color: AppColors.textColorLight, width: 1.5)),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+        fillColor: AppColors.textColorDark,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.textColorLight),
+        ),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.textColorLight)),
+        disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.textColorLight)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.textColorOrange))));
