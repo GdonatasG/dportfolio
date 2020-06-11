@@ -3,10 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 final ThemeData appThemeLight = ThemeData(
-    primaryColor: Colors.grey[100],
+    primaryColor: AppColors.textColorLight,
     primaryColorLight: Colors.white,
     primaryColorDark: AppColors.lighterGrey,
     accentColor: AppColors.greetingBackground,
+    backgroundColor: Colors.grey.shade50,
+    unselectedWidgetColor: AppColors.textColorDark,
+    cursorColor: AppColors.textColorDark,
+    iconTheme: IconThemeData(color: Colors.grey[800]),
+    indicatorColor: AppColors.greetingBackground,
     textTheme: TextTheme(
         headline5: TextStyle(
             fontFamily: "Billabong",
@@ -33,10 +38,24 @@ final ThemeData appThemeLight = ThemeData(
         selectedItemColor: AppColors.greetingBackground,
         unselectedIconTheme: IconThemeData(size: 22),
         selectedIconTheme: IconThemeData(size: 22)),
+    tabBarTheme: TabBarTheme(
+        labelColor: AppColors.greetingBackground,
+        unselectedLabelColor: AppColors.textColorDark),
     dividerTheme: DividerThemeData(
         color: AppColors.textColorDark, space: 0.5, thickness: 0.2),
     buttonTheme: ButtonThemeData(
-      shape: RoundedRectangleBorder(
+      shape: OutlineInputBorder(
           borderRadius: BorderRadius.circular(15.0),
-          side: BorderSide(color: AppColors.textColorDark, width: 1.2)),
-    ));
+          borderSide: BorderSide(color: AppColors.textColorDark, width: 1.5)),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+        fillColor: Colors.white,
+        border: OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.textColorDark),
+        ),
+        enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.textColorDark)),
+        focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.textColorDark)),
+        disabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.textColorDark))));

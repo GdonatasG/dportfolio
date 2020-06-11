@@ -24,4 +24,20 @@ abstract class LocaleKeys {
   static const LANGUAGE = "settingsPage.language.language";
   static const LANGUAGE_ENGLISH = "settingsPage.language.english";
   static const LANGUAGE_LITHUANIAN = "settingsPage.language.lithuanian";
+
+  // contacts page
+  static const HIRE_ME = "contactsPage.hire_me";
+  static const TAB_EMAIL_ME = "contactsPage.tabs.email_me";
+  static const TAB_OTHER_PLATFORMS = "contactsPage.tabs.other_platforms";
+
+  // contacts page - email tab page
+  static const EMAIL_RECIPIENT = "contactsPage.tabs.email.recipient";
+  static const EMAIL_SUBJECT = "contactsPage.tabs.email.subject";
+  static const EMAIL_MESSAGE = "contactsPage.tabs.email.message";
+  static const SEND = "contactsPage.tabs.email.send";
+  static const ERROR_VALIDATION_SUBJECT =
+      "contactsPage.tabs.email.validations.error_subject";
+  static const ERROR_VALIDATION_MESSAGE =
+      "contactsPage.tabs.email.validations.error_message";
+  static const SENDING_ERROR = "contactsPage.tabs.email.sent_error";
 }

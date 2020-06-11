@@ -19,9 +19,10 @@ class AppCustomWidgets {
         side: BorderSide(color: AppColors.lightestGrey, width: 1.2));
   }
 
-  static CircularProgressIndicator customProgressIndicatorDark =
-      CircularProgressIndicator(
-    valueColor: new AlwaysStoppedAnimation<Color>(AppColors.textColorDark),
-    strokeWidth: 2.0,
-  );
+  static circularProgressIndicator(Color color) {
+    return CircularProgressIndicator(
+      valueColor: new AlwaysStoppedAnimation<Color>(color),
+      strokeWidth: 2.0,
+    );
+  }
 }

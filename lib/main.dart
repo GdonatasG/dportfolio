@@ -50,31 +50,34 @@ class _ApplicationState extends State<Application> {
 
   @override
   Widget build(BuildContext context) {
-    return EzLocalizationBuilder(
-      delegate: EzLocalizationDelegate(
-        supportedLocales: [
-          Locale(Constants.LANG_EN),
-          Locale(Constants.LANG_LT)
-        ],
-        locale: getCurrentLocale(context),
-      ),
-      builder: (context, localizationDelegate) {
-        return ChangeNotifierProvider<ThemeChanger>(
-            create: (_) => ThemeChanger(_setStartingTheme()),
-            child: MaterialApp(
-              //locale: getCurrentLocale(context),
-              localizationsDelegates:
-                  localizationDelegate.localizationDelegates,
-              supportedLocales: localizationDelegate.supportedLocales,
-              localeResolutionCallback:
-                  localizationDelegate.localeResolutionCallback,
-              debugShowCheckedModeBanner: false,
-              title: Constants.APP_NAME,
-              theme: _setStartingTheme(),
-              home: SafeArea(
-                child: Scaffold(body: _setStartingPage(context)),
-              ),
-            ));
+    return OrientationBuilder(
+      builder: (ctx, orientation) {
+        return EzLocalizationBuilder(
+          delegate: EzLocalizationDelegate(
+            supportedLocales: [
+              Locale(Constants.LANG_EN),
+              Locale(Constants.LANG_LT)
+            ],
+            locale: getCurrentLocale(context),
+          ),
+          builder: (context, localizationDelegate) {
+            return ChangeNotifierProvider<ThemeChanger>(
+                create: (_) => ThemeChanger(_setStartingTheme()),
+                child: MaterialApp(
+                  localizationsDelegates:
+                      localizationDelegate.localizationDelegates,
+                  supportedLocales: localizationDelegate.supportedLocales,
+                  localeResolutionCallback:
+                      localizationDelegate.localeResolutionCallback,
+                  debugShowCheckedModeBanner: false,
+                  title: Constants.APP_NAME,
+                  theme: _setStartingTheme(),
+                  home: SafeArea(
+                    child: Scaffold(body: _setStartingPage(context)),
+                  ),
+                ));
+          },
+        );
       },
     );
   }
@@ -169,7 +172,7 @@ class _ApplicationState extends State<Application> {
                   ),
                   AppCustomWidgets.logoWidget,
                   Column(children: [
-                    _msgLayout(context, greetingMessage),
+                    _messageLayout(context, greetingMessage),
                     SizedBox(
                       height: 20,
                     ),
@@ -188,71 +191,39 @@ class _ApplicationState extends State<Application> {
     return Container(
       color: AppColors.greetingBackground,
       child: Center(
-        child: AppCustomWidgets.customProgressIndicatorDark,
+        child: AppCustomWidgets.circularProgressIndicator(
+            greetingTheme.indicatorColor),
       ),
     );
   }
 
-  _msgLayout(BuildContext context, Message greetingMessage) {
+  _messageLayout(BuildContext context, Message greetingMessage) {
     return Container(
       margin: EdgeInsets.only(top: 30),
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.only(top: 5, bottom: 5),
       decoration: BoxDecoration(
           color: Colors.grey[100], borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            flex: 6,
-            child: Row(
-              children: [
-                Image.asset(
-                  "assets/images/face.png",
-                  width: 50,
-                  height: 50,
-                  fit: BoxFit.fill,
-                ),
-                SizedBox(width: 10.0),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        greetingMessage.author,
-                        maxLines: 1,
-                        style: greetingTheme.textTheme.headline2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: 5.0),
-                      Text(
-                        context.getString(greetingMessage.message),
-                        overflow: TextOverflow.ellipsis,
-                        style: greetingTheme.textTheme.headline4,
-                        maxLines: 6,
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                    alignment: Alignment.topRight,
-                    child: Text(
-                      context.getString(greetingMessage.time),
-                      style: greetingTheme.textTheme.headline4
-                          .copyWith(fontSize: 12.5),
-                    ))
-              ],
-            ),
-          )
-        ],
+      child: ListTile(
+        leading: Image.asset(
+          "assets/images/face.png",
+          width: 50,
+          height: 50,
+          fit: BoxFit.fill,
+        ),
+        title: Text(
+          greetingMessage.author,
+          maxLines: 1,
+          style: greetingTheme.textTheme.headline2,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitle: Text(
+          context.getString(greetingMessage.message),
+          style: greetingTheme.textTheme.headline4,
+        ),
+        trailing: Text(
+          context.getString(greetingMessage.time),
+          style: greetingTheme.textTheme.headline4.copyWith(fontSize: 12.5),
+        ),
       ),
     );
   }
@@ -270,12 +241,10 @@ class _ApplicationState extends State<Application> {
               context.getString(LocaleKeys.GREETING_DATA_START_READING),
               style: greetingTheme.textTheme.headline3,
             ),
-            onPressed: () {
+            onPressed: () async {
               _greetingDataBloc.updateGreetingPreference();
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => MainPage()));
-              });
+              await Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => MainPage()));
             },
           ),
           // layout switcher checkbox
@@ -302,13 +271,17 @@ class _ApplicationState extends State<Application> {
     return StreamBuilder(
       stream: _greetingDataBloc.checkboxStream,
       builder: (BuildContext context, snapshot) {
-        return Checkbox(
-          value: snapshot.hasData ? snapshot.data : false,
-          activeColor: AppColors.greetingBackground,
-          checkColor: AppColors.textColorDark,
-          onChanged: (value) {
-            _greetingDataBloc.updateCheckboxValue(value);
-          },
+        return Theme(
+          data: ThemeData(unselectedWidgetColor: AppColors.textColorDark),
+          child: Checkbox(
+            value: snapshot.hasData ? snapshot.data : false,
+            activeColor: AppColors.greetingBackground,
+            checkColor: AppColors.textColorDark,
+            focusColor: AppColors.textColorDark,
+            onChanged: (value) {
+              _greetingDataBloc.updateCheckboxValue(value);
+            },
+          ),
         );
       },
     );

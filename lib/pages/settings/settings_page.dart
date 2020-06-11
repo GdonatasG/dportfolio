@@ -27,6 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         body: _buildPreferenceSettings(context),
       ),
     );
@@ -41,25 +42,31 @@ class _SettingsPageState extends State<SettingsPage> {
       _itemText(
           context.getString(
               LocaleKeys.VERSION, {'version': Constants.APP_VERSION}),
-          leading: Icon(
-            Icons.info,
-            color: AppColors.textColorDark,
+          leading: IconTheme(
+            data: Theme.of(context).iconTheme,
+            child: Icon(
+              Icons.info,
+            ),
           ),
           isSingleLine: false),
       Divider(),
       _itemText(
           context.getString(
               LocaleKeys.CREATORS, {'creators': Constants.APP_CREATORS}),
-          leading: Icon(
-            Icons.person,
-            color: AppColors.textColorDark,
+          leading: IconTheme(
+            data: Theme.of(context).iconTheme,
+            child: Icon(
+              Icons.person,
+            ),
           ),
           isSingleLine: false),
       Divider(),
       _itemText(context.getString(LocaleKeys.BUILT_WITH),
-          leading: Icon(
-            Icons.smartphone,
-            color: AppColors.textColorDark,
+          leading: IconTheme(
+            data: Theme.of(context).iconTheme,
+            child: Icon(
+              Icons.smartphone,
+            ),
           ),
           isSingleLine: false),
       Divider(),
@@ -90,12 +97,15 @@ class _SettingsPageState extends State<SettingsPage> {
       Divider(),
       // language page
       _itemText(context.getString(LocaleKeys.LANGUAGE),
-          leading: Icon(
-            Icons.language,
-            color: AppColors.textColorDark,
+          leading: IconTheme(
+            data: Theme.of(context).iconTheme,
+            child: Icon(
+              Icons.language,
+            ),
           ),
-          trailing: Icon(Icons.arrow_forward, color: AppColors.textColorDark),
-          onTap: () {
+          trailing: IconTheme(
+              data: Theme.of(context).iconTheme,
+              child: Icon(Icons.arrow_forward)), onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => LanguagePage(
                   title: context.getString(LocaleKeys.LANGUAGE),
@@ -108,7 +118,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   _itemTitle(String title) {
     return Container(
-      color: Theme.of(context).primaryColorLight,
       child: PreferenceTitle(
         title,
         style: Theme.of(context).textTheme.headline6,
@@ -117,7 +126,10 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   _itemText(String text,
-      {Icon leading, Icon trailing, Function onTap, bool isSingleLine = true}) {
+      {Widget leading,
+      Widget trailing,
+      Function onTap,
+      bool isSingleLine = true}) {
     return PreferenceText(
       text,
       style: Theme.of(context).textTheme.headline4,

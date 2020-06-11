@@ -7,6 +7,7 @@ final ThemeData greetingTheme = ThemeData(
   primaryColorLight: Colors.white,
   primaryColorDark: Colors.grey[400],
   accentColor: AppColors.greetingBackground,
+  indicatorColor: AppColors.textColorDark,
   textTheme: TextTheme(
       headline5: TextStyle(
           fontFamily: "Billabong",

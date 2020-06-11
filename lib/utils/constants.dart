@@ -16,4 +16,21 @@ class Constants {
   // language codes
   static const LANG_EN = 'en';
   static const LANG_LT = 'lt';
+
+  // EMAIL
+  static const MY_EMAIL = "zitkusd@gmail.com";
+
+  // social (other platforms) profile urls
+  static const TITLE_FREELANCER = "Freelancer";
+  static const URL_FREELANCER = "https://www.freelancer.com";
+  static const LOGO_SRC_FREELANCER =
+      "assets/images/platforms/freelancer_logo.jpg";
+
+  static const TITLE_UPWORK = "Upwork";
+  static const URL_UPWORK = "https://www.upwork.com";
+  static const LOGO_SRC_UPWORK = "assets/images/platforms/upwork_logo.png";
+
+  static const TITLE_LINKEDIN = "LinkedIn";
+  static const URL_LINKEDIN = "https://www.linkedin.com";
+  static const LOGO_SRC_LINKEDIN = "assets/images/platforms/linkedin_logo.jpg";
 }

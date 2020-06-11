@@ -20,7 +20,6 @@ dependencies:
   shared_preferences: ^0.5.7+3
   flutter_bloc: ^4.0.0
   provider: ^4.1.1
-  #easy_localization: ^2.3.2
   ez_localization: ^0.3.0
   flutter_localizations:
     sdk: flutter
@@ -32,6 +31,9 @@ dependencies:
   # preferences for settings page
   preferences: ^5.2.0
   dynamic_theme: ^1.0.0
+  # email sender
+  flutter_email_sender: ^3.0.1
+  url_launcher: ^5.4.10
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +58,7 @@ flutter:
   assets:
     - assets/languages/
     - assets/images/
+    - assets/images/platforms/
   #   - images/a_dot_ham.jpeg
   fonts:
     - family: Roboto
