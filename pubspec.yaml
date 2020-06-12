@@ -20,7 +20,6 @@ dependencies:
   shared_preferences: ^0.5.7+3
   flutter_bloc: ^4.0.0
   provider: ^4.1.1
-  ez_localization: ^0.3.0
   flutter_localizations:
     sdk: flutter
   flutter_native_splash: ^0.1.9
@@ -30,7 +29,6 @@ dependencies:
   rxdart: ^0.24.1
   # preferences for settings page
   preferences: ^5.2.0
-  dynamic_theme: ^1.0.0
   # email sender
   flutter_email_sender: ^3.0.1
   url_launcher: ^5.4.10

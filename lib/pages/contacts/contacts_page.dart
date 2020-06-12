@@ -4,7 +4,7 @@ import 'package:dportfolio/utils/locale_keys.g.dart';
 import 'package:dportfolio/utils/themes/app_custom_dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ez_localization/ez_localization.dart';
+import 'package:dportfolio/appData/app_data_export.dart';
 
 class ContactsPage extends StatefulWidget {
   @override

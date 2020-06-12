@@ -2,7 +2,7 @@ import 'package:dportfolio/utils/constants.dart';
 import 'package:dportfolio/utils/locale_keys.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:ez_localization/ez_localization.dart';
+import 'package:dportfolio/appData/app_data_export.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class OtherPlatformsPage extends StatefulWidget {

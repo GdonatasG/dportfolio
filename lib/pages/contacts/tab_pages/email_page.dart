@@ -7,7 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
-import 'package:ez_localization/ez_localization.dart';
+import 'package:dportfolio/appData/app_data_export.dart';
 
 class EmailPage extends StatefulWidget {
   @override
@@ -191,4 +191,10 @@ class _EmailPageState extends State<EmailPage>
 
   @override
   bool get wantKeepAlive => true;
+
+  @override
+  void dispose() {
+    _emailTabBloc.close();
+    super.dispose();
+  }
 }
