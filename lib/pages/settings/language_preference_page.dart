@@ -1,7 +1,7 @@
 import 'package:dportfolio/utils/constants.dart';
 import 'package:dportfolio/utils/extensions.dart';
 import 'package:dportfolio/utils/locale_keys.g.dart';
-import 'package:ez_localization/ez_localization.dart';
+import 'package:dportfolio/appData/app_data_export.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:preferences/preferences.dart';
@@ -16,11 +16,6 @@ class LanguagePage extends StatefulWidget {
 }
 
 class _LanguagePageState extends State<LanguagePage> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     _initLanguage(context);
@@ -39,11 +34,7 @@ class _LanguagePageState extends State<LanguagePage> {
           Constants.PREFERENCE_LANGUAGE,
           isDefault: true,
           onSelect: () {
-            // post frame callback to avoid calling Builder when
-            // app is already building (on start)
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              _updateLanguage(Locale(Constants.LANG_EN), context);
-            });
+            _updateLanguage(Locale(Constants.LANG_EN), context);
           },
         ),
         Divider(),
@@ -62,7 +53,11 @@ class _LanguagePageState extends State<LanguagePage> {
   }
 
   _updateLanguage(Locale locale, BuildContext context) {
-    EzLocalizationBuilder.of(context).changeLocale(locale);
+    // Using other shared pref variable to store user selected language
+    // PREFERENCE_LANGUAGE variable is used only to store radio button selection
+    PrefService.setString(
+        Constants.PREFERENCE_LANGUAGE_MANUAL, locale.languageCode);
+    AppDataBuilder.of(context).changeLocale(locale);
   }
 
   _initLanguage(BuildContext context) {
@@ -70,6 +65,6 @@ class _LanguagePageState extends State<LanguagePage> {
     PrefService.setString(
         Constants.PREFERENCE_LANGUAGE,
         getCurrentLanguageCodeByConstant(
-            context, EzLocalization.of(context).locale));
+            context, AppLocalizations.of(context).locale));
   }
 }

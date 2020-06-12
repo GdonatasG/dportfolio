@@ -1,3 +1,4 @@
+import 'package:dportfolio/appData/app_data_export.dart';
 import 'package:dportfolio/data/model/Message.dart';
 import 'package:dportfolio/data/repository/greeting_data_repository_impl.dart';
 import 'package:dportfolio/pages/main_page.dart';
@@ -6,19 +7,16 @@ import 'package:dportfolio/utils/extensions.dart';
 import 'package:dportfolio/utils/themes/app_colors.dart';
 import 'package:dportfolio/utils/themes/app_theme_dark.dart';
 import 'package:dportfolio/utils/themes/greeting_page_theme.dart';
-import 'package:ez_localization/ez_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:preferences/preferences.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 import 'bloc/greeting_data/greeting_data_bloc_export.dart';
 import 'utils/locale_keys.g.dart';
 import 'utils/themes/app_custom_widgets.dart';
 import 'utils/themes/app_theme_light.dart';
-import 'utils/themes/theme_changer.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,32 +50,27 @@ class _ApplicationState extends State<Application> {
   Widget build(BuildContext context) {
     return OrientationBuilder(
       builder: (ctx, orientation) {
-        return EzLocalizationBuilder(
-          delegate: EzLocalizationDelegate(
-            supportedLocales: [
+        return AppDataBuilder(
+            delegate: AppLocalizationsDelegate(supportedLocales: [
               Locale(Constants.LANG_EN),
               Locale(Constants.LANG_LT)
-            ],
-            locale: getCurrentLocale(context),
-          ),
-          builder: (context, localizationDelegate) {
-            return ChangeNotifierProvider<ThemeChanger>(
-                create: (_) => ThemeChanger(_setStartingTheme()),
-                child: MaterialApp(
-                  localizationsDelegates:
-                      localizationDelegate.localizationDelegates,
-                  supportedLocales: localizationDelegate.supportedLocales,
-                  localeResolutionCallback:
-                      localizationDelegate.localeResolutionCallback,
-                  debugShowCheckedModeBanner: false,
-                  title: Constants.APP_NAME,
-                  theme: _setStartingTheme(),
-                  home: SafeArea(
-                    child: Scaffold(body: _setStartingPage(context)),
-                  ),
-                ));
-          },
-        );
+            ], locale: getCurrentLocale(context)),
+            appTheme: _setStartingTheme(),
+            builder: (context, localizationDelegate, theme) {
+              return MaterialApp(
+                localizationsDelegates:
+                    localizationDelegate.localizationDelegates,
+                supportedLocales: localizationDelegate.supportedLocales,
+                localeResolutionCallback:
+                    localizationDelegate.localeResolutionCallback,
+                debugShowCheckedModeBanner: false,
+                title: Constants.APP_NAME,
+                theme: theme,
+                home: SafeArea(
+                  child: Scaffold(body: _setStartingPage(context)),
+                ),
+              );
+            });
       },
     );
   }

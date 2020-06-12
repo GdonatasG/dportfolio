@@ -8,6 +8,7 @@ class Constants {
   // preferences
   static const PREFERENCE_SHOW_GREETING = 'show_greeting';
   static const PREFERENCE_LANGUAGE = 'language';
+  static const PREFERENCE_LANGUAGE_MANUAL = 'language_manual';
   static const PREFERENCE_UI_THEME = 'ui_theme';
   static const PREFERENCES_UI_THEME_LIGHT = 'ui_light';
   static const PREFERENCES_UI_THEME_DARK = 'ui_dark';

@@ -1,16 +1,13 @@
 import 'package:dportfolio/pages/settings/language_preference_page.dart';
 import 'package:dportfolio/utils/constants.dart';
 import 'package:dportfolio/utils/locale_keys.g.dart';
-import 'package:dportfolio/utils/themes/app_colors.dart';
 import 'package:dportfolio/utils/themes/app_theme_dark.dart';
 import 'package:dportfolio/utils/themes/app_theme_light.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:preferences/preference_page.dart';
 import 'package:preferences/preferences.dart';
-import 'package:provider/provider.dart';
-import 'package:dportfolio/utils/themes/theme_changer.dart';
-import 'package:ez_localization/ez_localization.dart';
+import 'package:dportfolio/appData/app_data_export.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -34,8 +31,6 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   _buildPreferenceSettings(BuildContext context) {
-    ThemeChanger _themeChanger =
-        Provider.of<ThemeChanger>(context, listen: false);
     return PreferencePage([
       _itemTitle(context.getString(LocaleKeys.ABOUT_APPLICATION)),
       Divider(),
@@ -80,7 +75,7 @@ class _SettingsPageState extends State<SettingsPage> {
         isDefault: true,
         onSelect: () {
           WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-            _themeChanger.setTheme(appThemeLight, context);
+            AppDataBuilder.of(context).changeTheme(appThemeLight);
           });
         },
       ),
@@ -91,7 +86,7 @@ class _SettingsPageState extends State<SettingsPage> {
         Constants.PREFERENCES_UI_THEME_DARK,
         Constants.PREFERENCE_UI_THEME,
         onSelect: () {
-          _themeChanger.setTheme(appThemeDark, context);
+          AppDataBuilder.of(context).changeTheme(appThemeDark);
         },
       ),
       Divider(),
