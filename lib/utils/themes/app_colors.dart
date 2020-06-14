@@ -15,5 +15,5 @@ class AppColors {
   static Color darkestGrey = Colors.grey.shade900;
   static Color textColorDark = Colors.grey.shade800;
   static Color textColorLight = Colors.grey[100];
-  static Color textColorOrange = Colors.orange[700];
+  static Color textColorBlue = Colors.blue.shade600;
 }

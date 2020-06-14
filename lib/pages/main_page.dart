@@ -1,4 +1,4 @@
-import 'package:dportfolio/pages/about_me_page.dart';
+import 'file:///C:/Users/Donatas/AndroidStudioProjects/d_portfolio/lib/pages/about_me/about_me_page.dart';
 import 'file:///C:/Users/Donatas/AndroidStudioProjects/d_portfolio/lib/pages/contacts/contacts_page.dart';
 import 'package:dportfolio/pages/portfolio_page.dart';
 import 'package:dportfolio/utils/constants.dart';

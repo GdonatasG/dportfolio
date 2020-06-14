@@ -11,24 +11,13 @@ class _PortfolioPageState extends State<PortfolioPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Text(
+        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+            centerTitle: true,
+            title: Text(
               Constants.APP_NAME,
               style: Theme.of(context).textTheme.headline5,
-            )
-          ],
-        ),
-      ),
-      body: SafeArea(
-        child: Container(
-          child: Text("portfolio"),
-        ),
-      ),
-    );
+            )),
+        body: Container());
   }
 }

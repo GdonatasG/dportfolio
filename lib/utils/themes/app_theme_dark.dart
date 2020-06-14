@@ -5,14 +5,18 @@ import 'package:flutter/material.dart';
 final ThemeData appThemeDark = ThemeData(
     primaryColor: AppColors.textColorDark,
     primaryColorLight: AppColors.textColorLight,
-    primaryColorDark: AppColors.textColorDark,
-    accentColor: AppColors.textColorOrange,
+    primaryColorDark: Colors.grey.shade700,
+    accentColor: AppColors.textColorBlue,
     backgroundColor: AppColors.darkestGrey,
     unselectedWidgetColor: AppColors.textColorLight,
     cursorColor: AppColors.textColorLight,
-    iconTheme: IconThemeData(color: AppColors.textColorLight),
-    indicatorColor: AppColors.textColorOrange,
+    iconTheme: IconThemeData(color: AppColors.lightGrey),
+    indicatorColor: AppColors.textColorBlue,
     textTheme: TextTheme(
+        subtitle1: TextStyle(
+            fontFamily: "Billabong",
+            fontSize: 21,
+            color: AppColors.textColorBlue),
         headline5: TextStyle(
             fontFamily: "Billabong",
             fontSize: 27,
@@ -32,16 +36,16 @@ final ThemeData appThemeDark = ThemeData(
         headline6: TextStyle(
             fontFamily: "Billabong",
             fontSize: 20,
-            color: AppColors.textColorOrange,
+            color: AppColors.textColorBlue,
             fontStyle: FontStyle.italic)),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: AppColors.textColorLight,
-        selectedItemColor: AppColors.textColorOrange,
+        selectedItemColor: AppColors.textColorBlue,
         unselectedIconTheme: IconThemeData(size: 22),
         selectedIconTheme: IconThemeData(size: 22)),
     tabBarTheme: TabBarTheme(
-        labelColor: AppColors.textColorOrange,
+        labelColor: AppColors.textColorBlue,
         unselectedLabelColor: AppColors.textColorLight),
     dividerTheme: DividerThemeData(
         color: AppColors.textColorLight, space: 0.5, thickness: 0.2),
@@ -60,4 +64,4 @@ final ThemeData appThemeDark = ThemeData(
         disabledBorder: OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.textColorLight)),
         focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.textColorOrange))));
+            borderSide: BorderSide(color: AppColors.textColorBlue))));

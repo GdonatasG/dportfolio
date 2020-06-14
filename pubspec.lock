@@ -103,7 +103,7 @@ packages:
       name: flutter_bloc
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.0"
+    version: "4.0.1"
   flutter_email_sender:
     dependency: "direct main"
     description:
@@ -123,6 +123,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.9"
+  flutter_sticky_header:
+    dependency: "direct main"
+    description:
+      name: flutter_sticky_header
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -306,6 +313,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.16"
+  timeline_list:
+    dependency: "direct main"
+    description:
+      name: timeline_list
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   typed_data:
     dependency: transitive
     description:
