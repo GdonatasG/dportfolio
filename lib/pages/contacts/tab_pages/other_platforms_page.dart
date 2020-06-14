@@ -1,5 +1,6 @@
 import 'package:dportfolio/utils/constants.dart';
 import 'package:dportfolio/utils/locale_keys.g.dart';
+import 'package:dportfolio/utils/themes/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dportfolio/appData/app_data_export.dart';
@@ -27,12 +28,27 @@ class _OtherPlatformsPageState extends State<OtherPlatformsPage>
                   spacing: 30,
                   direction: Axis.horizontal,
                   children: [
-                    _buildItem(context, Constants.LOGO_SRC_FREELANCER,
-                        Constants.TITLE_FREELANCER, Constants.URL_FREELANCER),
-                    _buildItem(context, Constants.LOGO_SRC_UPWORK,
-                        Constants.TITLE_UPWORK, Constants.URL_UPWORK),
-                    _buildItem(context, Constants.LOGO_SRC_LINKEDIN,
-                        Constants.TITLE_LINKEDIN, Constants.URL_LINKEDIN),
+                    _buildPlatformItem(
+                        context: context,
+                        bgColor: Colors.blue.shade900,
+                        titleColor: AppColors.textColorLight,
+                        iconSrc: Constants.ICON_SRC_FREELANCER,
+                        title: Constants.TITLE_FREELANCER,
+                        pageUrl: Constants.URL_FREELANCER),
+                    _buildPlatformItem(
+                        context: context,
+                        bgColor: Colors.lightGreenAccent.shade700,
+                        titleColor: AppColors.textColorLight,
+                        iconSrc: Constants.ICON_SRC_UPWORK,
+                        title: Constants.TITLE_UPWORK,
+                        pageUrl: Constants.URL_UPWORK),
+                    _buildPlatformItem(
+                        context: context,
+                        bgColor: Colors.blue.shade400,
+                        titleColor: AppColors.textColorLight,
+                        iconSrc: Constants.ICON_SRC_LINKEDIN,
+                        title: Constants.TITLE_LINKEDIN,
+                        pageUrl: Constants.URL_LINKEDIN),
                   ],
                 ),
               ),
@@ -43,8 +59,13 @@ class _OtherPlatformsPageState extends State<OtherPlatformsPage>
     );
   }
 
-  _buildItem(BuildContext context, String imageSrc, String title,
-          String pageUrl) =>
+  _buildPlatformItem(
+          {BuildContext context,
+          Color bgColor,
+          Color titleColor,
+          String iconSrc,
+          String title,
+          String pageUrl}) =>
       GestureDetector(
         onTap: () async {
           if (await canLaunch(pageUrl)) {
@@ -60,39 +81,30 @@ class _OtherPlatformsPageState extends State<OtherPlatformsPage>
           }
         },
         child: Container(
-          //margin: EdgeInsets.only(top: 20),
-          constraints: BoxConstraints(maxWidth: 120),
-          child: Column(
+          color: bgColor,
+          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                decoration: new BoxDecoration(
-                  shape: BoxShape.circle,
-                  border: new Border.all(
-                    color: Theme.of(context).unselectedWidgetColor,
-                    width: 1.2,
-                  ),
-                ),
-                child: CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.transparent,
-                    //backgroundColor: AppColors.lightGrey,
-                    child: ClipOval(
-                      child: Image.asset(
-                        imageSrc,
-                        fit: BoxFit.fill,
-                      ),
-                    )),
+              Image.asset(
+                iconSrc,
+                width: 40,
+                height: 40,
+                fit: BoxFit.fill,
               ),
-              Text(
-                title,
-                textAlign: TextAlign.center,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    .copyWith(fontSize: 24, fontStyle: FontStyle.normal),
+              SizedBox(
+                width: 10,
+              ),
+              Center(
+                child: Text(
+                  title,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headline6.copyWith(
+                      fontSize: 28,
+                      fontStyle: FontStyle.normal,
+                      color: titleColor),
+                ),
               )
             ],
           ),
