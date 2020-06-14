@@ -32,7 +32,7 @@
     }
   },
   "contactsPage": {
-    "hire_me": "Rinkis mane!",
+    "get_in_touch": "Bendraukime!",
     "tabs": {
       "email_me": "Rašyti laišką",
       "other_platforms": "Kitos platformos",
@@ -47,6 +47,34 @@
         },
         "sent_error": "Įvyko klaida! Bandykite dar."
       }
+    }
+  },
+  "aboutMePage": {
+    "title_mobile_developer_with_level": "Mobiliu aplikaciju kurejas",
+    "country_lithuania": "Lietuva",
+    "title_road_to_programming": "Programavimo kelias",
+    "road_to_programming_content1": "Kodėl informacinės technologijos? Todėl, nes tai yra beribė sritis. Kuo daugiau mokaisi - tuo sunkesnes problemas gali išspręsti ir daugiau funkcijų atlikti. Manau, jog šis šiuolaikinis pasaulis labai priklauso nuo IT, todėl mano tikslas yra tapti ir būti viso to kūrėju, o ne tik vartotoju.",
+    "road_to_programming_content2": "Kaip save atradau IT pasaulyje? Jau mokykloje domėjausi informacinėmis technologijomis, turbūt ne be reikalo ši pamoka ir buvo mėgstamiausia. Mokydamasis mokykloje net neįsivaizdavau kokios yra IT galimybės ir ką iš tikrųjų galima atlikti. Duomenų bazės, „API“, objektiškai orientuotas programavimas ir kiti dalykai tuo metu man buvo visiška tamsa.",
+    "title_the_beginning": "Visko pradžia",
+    "the_beginning_content1": "Po mokyklos nusprendžiau jėgas išbandyti Java programavimo kursuose pradedantiesiems. Ten teko susipažinti su Android programavimu, o tai man pasirodė tikrai įdomu ir verta dėmesio, todėl po kursų nusprendžiau tęsti mokymąsi individualiai. Tyrinėdamas bei besimokydamas atradau Kotlin programavimo kalbą, kuri man leido šiek tiek plačiau įsigilinti į Android programavimą. Po kurio laiko susipažinau ir su Flutter - karkasu, kuris leidžia kurti aplikacijas ne tik Android, bet ir iOS platformoms (Ši darbų aplikacija taip pat sukurta naudojantis minėtu karkasu).",
+    "title_university": "Universitetas",
+    "university_content1": "Šiuo metu esu Vytauto Didžiojo universiteto, informatikos sistemų specialybės studentas. Universiteto programa ir visa sistema suteikia man galimybę ne tik tobulėti IT sferoje, tačiau leidžia mokytis ir skirtingų sričių dalykų, kurie taip pat yra svarbūs šių dienų pasaulyje. Niekada negaliu nuspėti su kokio tipo projektu gali tekti dirbti ateityje, todėl turiu būti pasirengęs suprasti skirtingų projektų idėjas ir mintis.",
+    "title_goals": "Tikslai",
+    "goals_content1": "Šiuo metu turiu vieną didelį tikslą - kuo geriau išmokti naudotis Flutter karkaso galimybėmis, kad galėčiau užtikrinti savo darbų kokybę bei įvykdyti klientų patikėtas užduotis. Šį tikslą teks išskaidyti į daug mažų punktų, kad mokymąsis ir tobulėjimas būtų paprastesnis bei efektyvesnis.",
+    "title_skills": "Igudžiai",
+    "title_additional_skills": "Kiti igudžiai",
+    "additional_skills_content1": "Surinkta 100 balų iš informatikos valstybinio brandos egzamino.",
+    "title_education": "Išsilavinimas",
+    "timeline": {
+      "secondary_education_time": "2014 - 2018",
+      "secondary_education": "Vidurinis išsilavinimas",
+      "secondary_education_location": "Marijampolės Suduvos gimnazija. Marijampolė, Lietuva",
+      "java_course_time": "2018",
+      "java_course_name": "Java programavimo kursai",
+      "java_course_location": "Kaunas Coding School. Kaunas, Lietuva",
+      "university_education_time": "2019 - dabar",
+      "university_education_name": "Informatikos mokslų bakalauras",
+      "university_education_location": "Vytauto didžiojo universitetas. Kaunas, Lietuva"
     }
   }
 }

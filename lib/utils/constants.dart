@@ -1,9 +1,16 @@
 class Constants {
   Constants._();
 
+  // APP
   static const APP_VERSION = "v1.0";
   static const APP_NAME = "D.Portfolio";
   static const APP_CREATORS = "Donatas Žitkus";
+
+  // Assets
+  static const SRC_LOGO = "assets/images/logo.png";
+  static const SRC_FACE_BLACK = "assets/images/face_black.png";
+  static const SRC_FACE_RED = "assets/images/face_red.png";
+  static const SRC_FACE_WHITE = "assets/images/face_white.png";
 
   // preferences
   static const PREFERENCE_SHOW_GREETING = 'show_greeting';

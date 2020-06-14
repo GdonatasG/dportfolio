@@ -32,6 +32,8 @@ dependencies:
   # email sender
   flutter_email_sender: ^3.0.1
   url_launcher: ^5.4.10
+  flutter_sticky_header: ^0.4.2
+  timeline_list: ^0.0.5
 
 dev_dependencies:
   flutter_test:

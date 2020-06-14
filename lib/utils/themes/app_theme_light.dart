@@ -13,6 +13,10 @@ final ThemeData appThemeLight = ThemeData(
     iconTheme: IconThemeData(color: Colors.grey[800]),
     indicatorColor: AppColors.greetingBackground,
     textTheme: TextTheme(
+        subtitle1: TextStyle(
+            fontFamily: "Billabong",
+            fontSize: 21,
+            color: AppColors.textColorDark),
         headline5: TextStyle(
             fontFamily: "Billabong",
             fontSize: 27,

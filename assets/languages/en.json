@@ -32,7 +32,7 @@
     }
   },
   "contactsPage": {
-    "hire_me": "Hire me!",
+    "get_in_touch": "Get in touch!",
     "tabs": {
       "email_me": "Email me",
       "other_platforms": "Other platforms",
@@ -47,6 +47,34 @@
         },
         "sent_error": "Something went wrong! Try again."
       }
+    }
+  },
+  "aboutMePage": {
+    "title_mobile_developer_with_level": "Mobile Developer (Junior level)",
+    "country_lithuania": "Lithuania",
+    "title_road_to_programming": "Road to Programming",
+    "road_to_programming_content1": "Why Information technology? Because it's unlimited thing, more you learn – more you can do. In my mind, today's world depends on that thing, so I want to be a part of this age of technology – not only to use, but also create.",
+    "road_to_programming_content2": "How I found myself in IT? At school I was already interested in Information Technology and computers. I think for that reason my favourite lesson was Computer Science. When I was at school I couldn't imagine how big is an IT world and what is actually possible to do. Database, API, Object oriented programming and other things like that was a darkness for me at that time.",
+    "title_the_beginning": "The Beginning",
+    "the_beginning_content1": "After graduating from school I decided to try Java development course for beginners. There I heard about Android Development which turned out to be really interesting for me and after course I started learning Android Development individually. By exploring new things I found out about kotlin language which let me to get a bit deeper into mobile development. Then one interesting thing appeared in my life - Flutter framework. It's a cross platform framework which allows to create Mobile Applications for Android and iOS. The simplicity of Flutter allows to create cutting edge design and functionality (This portfolio APP that you are reading is also created with Flutter).",
+    "title_university": "University",
+    "university_content1": "Right now I'm studying at Vytautas Magnus University, Information Systems speciality. The university course and system helps me to learn not only IT things, but also side skills, which is really important in this modern life. I can't expect with what type of project I'm going to work in the future, for that reason I have to be prepared to understand some specific project idea.",
+    "title_goals": "Goals",
+    "goals_content1": "Actually, main goal for me is to master Flutter development to fulfill your needs and provide the best quality for you. It's the thing that has to be divided in some small points to get the best result.",
+    "title_skills": "Skills",
+    "title_additional_skills": "Additional Skills",
+    "additional_skills_content1": "Scored 100 percent from Information Technology exam.",
+    "title_education": "Education",
+    "timeline": {
+      "secondary_education_time": "2014 - 2018",
+      "secondary_education": "Secondary education",
+      "secondary_education_location": "Marijampoles Suduvos gymnasium. Marijampole, Lithuania",
+      "java_course_time": "2018",
+      "java_course_name": "Java development course",
+      "java_course_location": "Kaunas Coding School. Kaunas, Lithuania",
+      "university_education_time": "2019 - present",
+      "university_education_name": "Bachelor of Computer Science",
+      "university_education_location": "Vytautas Magnus university. Kaunas, Lithuania"
     }
   }
 }

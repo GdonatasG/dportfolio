@@ -27,15 +27,10 @@ class _ContactsPageState extends State<ContactsPage>
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Text(
-              context.getString(LocaleKeys.HIRE_ME),
-              style: Theme.of(context).textTheme.headline5,
-            )
-          ],
+        centerTitle: true,
+        title: Text(
+          context.getString(LocaleKeys.GET_IN_TOUCH),
+          style: Theme.of(context).textTheme.headline5,
         ),
         bottom: TabBar(
           labelStyle: Theme.of(context)

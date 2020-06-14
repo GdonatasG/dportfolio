@@ -198,7 +198,7 @@ class _ApplicationState extends State<Application> {
           color: Colors.grey[100], borderRadius: BorderRadius.circular(10)),
       child: ListTile(
         leading: Image.asset(
-          "assets/images/face.png",
+          Constants.SRC_FACE_BLACK,
           width: 50,
           height: 50,
           fit: BoxFit.fill,
