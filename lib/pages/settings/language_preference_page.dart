@@ -9,7 +9,7 @@ import 'package:preferences/preferences.dart';
 class LanguagePage extends StatefulWidget {
   final String title;
 
-  LanguagePage({this.title});
+  LanguagePage({Key key, this.title}) : super(key: key);
 
   @override
   _LanguagePageState createState() => _LanguagePageState();
@@ -19,36 +19,38 @@ class _LanguagePageState extends State<LanguagePage> {
   @override
   Widget build(BuildContext context) {
     _initLanguage(context);
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: PreferencePage([
-        RadioPreference(
-          Text(
-            context.getString(LocaleKeys.LANGUAGE_ENGLISH),
-            style: Theme.of(context).textTheme.headline4,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: PreferencePage([
+          RadioPreference(
+            Text(
+              context.getString(LocaleKeys.LANGUAGE_ENGLISH),
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            Constants.LANG_EN,
+            Constants.PREFERENCE_LANGUAGE,
+            isDefault: true,
+            onSelect: () {
+              _updateLanguage(Locale(Constants.LANG_EN), context);
+            },
           ),
-          Constants.LANG_EN,
-          Constants.PREFERENCE_LANGUAGE,
-          isDefault: true,
-          onSelect: () {
-            _updateLanguage(Locale(Constants.LANG_EN), context);
-          },
-        ),
-        Divider(),
-        RadioPreference(
-          Text(context.getString(LocaleKeys.LANGUAGE_LITHUANIAN),
-              style: Theme.of(context).textTheme.headline4),
-          Constants.LANG_LT,
-          Constants.PREFERENCE_LANGUAGE,
-          onSelect: () {
-            _updateLanguage(Locale(Constants.LANG_LT), context);
-          },
-        ),
-        Divider(),
-      ]),
+          Divider(),
+          RadioPreference(
+            Text(context.getString(LocaleKeys.LANGUAGE_LITHUANIAN),
+                style: Theme.of(context).textTheme.headline4),
+            Constants.LANG_LT,
+            Constants.PREFERENCE_LANGUAGE,
+            onSelect: () {
+              _updateLanguage(Locale(Constants.LANG_LT), context);
+            },
+          ),
+          Divider(),
+        ]),
+      ),
     );
   }
 

@@ -1,5 +1,6 @@
 import 'package:dportfolio/appData/app_data_export.dart';
 import 'package:dportfolio/data/model/Message.dart';
+import 'package:dportfolio/data/repository/github/github_repository_impl.dart';
 import 'package:dportfolio/data/repository/greeting_data_repository_impl.dart';
 import 'package:dportfolio/pages/main_page.dart';
 import 'package:dportfolio/utils/constants.dart';
@@ -17,6 +18,7 @@ import 'bloc/greeting_data/greeting_data_bloc_export.dart';
 import 'utils/locale_keys.g.dart';
 import 'utils/themes/app_custom_widgets.dart';
 import 'utils/themes/app_theme_light.dart';
+import 'data/service/github_service.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +41,12 @@ class _ApplicationState extends State<Application> {
   final GreetingDataRepositoryImpl greetingDataRepositoryImpl =
       GreetingDataRepositoryImpl();
 
+  static GithubService githubService = GithubService.create();
+  final GithubRepositoryImpl githubRepositoryImpl =
+      GithubRepositoryImpl(githubService: githubService);
+
+  MainPage mainPage;
+
   @override
   void initState() {
     _greetingDataBloc = GreetingDataBloc(
@@ -48,37 +56,44 @@ class _ApplicationState extends State<Application> {
 
   @override
   Widget build(BuildContext context) {
-    return OrientationBuilder(
-      builder: (ctx, orientation) {
-        return AppDataBuilder(
-            delegate: AppLocalizationsDelegate(supportedLocales: [
-              Locale(Constants.LANG_EN),
-              Locale(Constants.LANG_LT)
-            ], locale: getCurrentLocale(context)),
-            appTheme: _setStartingTheme(),
-            builder: (context, localizationDelegate, theme) {
-              return MaterialApp(
-                localizationsDelegates:
-                    localizationDelegate.localizationDelegates,
-                supportedLocales: localizationDelegate.supportedLocales,
-                localeResolutionCallback:
-                    localizationDelegate.localeResolutionCallback,
-                debugShowCheckedModeBanner: false,
-                title: Constants.APP_NAME,
-                theme: theme,
-                home: SafeArea(
-                  child: Scaffold(body: _setStartingPage(context)),
-                ),
-              );
-            });
-      },
+    return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider(
+          create: (_) => this.githubRepositoryImpl,
+        )
+      ],
+      child: OrientationBuilder(
+        builder: (ctx, orientation) {
+          return AppDataBuilder(
+              delegate: AppLocalizationsDelegate(supportedLocales: [
+                Locale(Constants.LANG_EN),
+                Locale(Constants.LANG_LT)
+              ], locale: getCurrentLocale(context)),
+              appTheme: _setStartingTheme(),
+              builder: (context, localizationDelegate, theme) {
+                return MaterialApp(
+                  localizationsDelegates:
+                      localizationDelegate.localizationDelegates,
+                  supportedLocales: localizationDelegate.supportedLocales,
+                  localeResolutionCallback:
+                      localizationDelegate.localeResolutionCallback,
+                  debugShowCheckedModeBanner: false,
+                  title: Constants.APP_NAME,
+                  theme: theme,
+                  home: SafeArea(
+                    child: Scaffold(body: _setStartingPage(context)),
+                  ),
+                );
+              });
+        },
+      ),
     );
   }
 
   _setStartingPage(BuildContext context) {
     bool showGreeting =
         PrefService.getBool(Constants.PREFERENCE_SHOW_GREETING) ?? true;
-    return showGreeting ? _buildGreetingLayout(context) : MainPage();
+    return showGreeting ? _buildGreetingLayout(context) : mainPage;
   }
 
   _setStartingTheme() {

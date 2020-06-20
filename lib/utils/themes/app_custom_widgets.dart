@@ -1,6 +1,7 @@
-import 'package:dportfolio/utils/themes/app_custom_dimensions.dart';
+import 'package:dportfolio/utils/locale_keys.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:dportfolio/appData/app_data_export.dart';
 
 import '../constants.dart';
 import 'app_colors.dart';
@@ -27,4 +28,14 @@ class AppCustomWidgets {
       strokeWidth: 2.0,
     );
   }
+
+  static stickyHeaderLayout(
+          {@required String title, @required BuildContext context}) =>
+      Container(
+          color: Theme.of(context).primaryColorDark,
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.subtitle1,
+          ));
 }

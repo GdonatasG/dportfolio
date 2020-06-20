@@ -50,7 +50,7 @@
     }
   },
   "aboutMePage": {
-    "title_mobile_developer_with_level": "Mobiliu aplikaciju kurejas",
+    "title_mobile_developer_with_level": "Mobilių aplikacijų kūrėjas",
     "country_lithuania": "Lietuva",
     "title_road_to_programming": "Programavimo kelias",
     "road_to_programming_content1": "Kodėl informacinės technologijos? Todėl, nes tai yra beribė sritis. Kuo daugiau mokaisi - tuo sunkesnes problemas gali išspręsti ir daugiau funkcijų atlikti. Manau, jog šis šiuolaikinis pasaulis labai priklauso nuo IT, todėl mano tikslas yra tapti ir būti viso to kūrėju, o ne tik vartotoju.",
@@ -61,8 +61,8 @@
     "university_content1": "Šiuo metu esu Vytauto Didžiojo universiteto, informatikos sistemų specialybės studentas. Universiteto programa ir visa sistema suteikia man galimybę ne tik tobulėti IT sferoje, tačiau leidžia mokytis ir skirtingų sričių dalykų, kurie taip pat yra svarbūs šių dienų pasaulyje. Niekada negaliu nuspėti su kokio tipo projektu gali tekti dirbti ateityje, todėl turiu būti pasirengęs suprasti skirtingų projektų idėjas ir mintis.",
     "title_goals": "Tikslai",
     "goals_content1": "Šiuo metu turiu vieną didelį tikslą - kuo geriau išmokti naudotis Flutter karkaso galimybėmis, kad galėčiau užtikrinti savo darbų kokybę bei įvykdyti klientų patikėtas užduotis. Šį tikslą teks išskaidyti į daug mažų punktų, kad mokymąsis ir tobulėjimas būtų paprastesnis bei efektyvesnis.",
-    "title_skills": "Igudžiai",
-    "title_additional_skills": "Kiti igudžiai",
+    "title_skills": "Įgūdžiai",
+    "title_additional_skills": "Kiti įgūdžiai",
     "additional_skills_content1": "Surinkta 100 balų iš informatikos valstybinio brandos egzamino.",
     "title_education": "Išsilavinimas",
     "timeline": {
@@ -76,5 +76,10 @@
       "university_education_name": "Informatikos mokslų bakalauras",
       "university_education_location": "Vytauto didžiojo universitetas. Kaunas, Lietuva"
     }
+  },
+  "githubPage": {
+    "public_repos": "{repos} Viešos saugyklos",
+    "list_empty": "Sąrašas tuščias",
+    "visit_profile": "Aplankyti profilį"
   }
 }

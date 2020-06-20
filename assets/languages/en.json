@@ -76,5 +76,10 @@
       "university_education_name": "Bachelor of Computer Science",
       "university_education_location": "Vytautas Magnus university. Kaunas, Lithuania"
     }
+  },
+  "githubPage": {
+    "public_repos": "{repos} Public Repos",
+    "list_empty": "List is empty",
+    "visit_profile": "Visit profile"
   }
 }
