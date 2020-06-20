@@ -41,4 +41,8 @@ class Constants {
   static const TITLE_LINKEDIN = "LinkedIn";
   static const URL_LINKEDIN = "https://www.linkedin.com";
   static const ICON_SRC_LINKEDIN = "assets/images/platforms/icon_linkedin.png";
+
+  //GITHUB
+  static const TITLE_GITHUB = "GitHub";
+  static const GITHUB_NAME = "gdonatasg";
 }

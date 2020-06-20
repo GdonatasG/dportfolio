@@ -73,105 +73,109 @@ class _EmailPageState extends State<EmailPage>
     final inputStyle =
         Theme.of(context).textTheme.headline4.copyWith(fontSize: 14.5);
     return SafeArea(
-      child: Center(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Form(
-              key: _formKey,
-              child: StreamBuilder(
-                stream: _emailTabBloc.progressIndicatorStream,
-                builder: (_, snapshot) {
-                  bool isFormActionsEnabled =
-                      snapshot.hasData ? !snapshot.data : true;
-                  return Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      // RECIPIENT INPUT
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          enabled: false,
-                          style: inputStyle,
-                          controller: _recipientController,
-                          decoration: InputDecoration(
-                              filled: true,
-                              labelStyle: labelStyle,
-                              labelText: context
-                                  .getString(LocaleKeys.EMAIL_RECIPIENT)),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: Center(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Form(
+                key: _formKey,
+                child: StreamBuilder(
+                  stream: _emailTabBloc.progressIndicatorStream,
+                  builder: (_, snapshot) {
+                    bool isFormActionsEnabled =
+                        snapshot.hasData ? !snapshot.data : true;
+                    return Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        // RECIPIENT INPUT
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            enabled: false,
+                            style: inputStyle,
+                            controller: _recipientController,
+                            decoration: InputDecoration(
+                                filled: true,
+                                labelStyle: labelStyle,
+                                labelText: context
+                                    .getString(LocaleKeys.EMAIL_RECIPIENT)),
+                          ),
                         ),
-                      ),
-                      // EMAIL SUBJECT INPUT
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          enabled: isFormActionsEnabled,
-                          style: inputStyle,
-                          controller: _subjectController,
-                          validator: (value) {
-                            if (value.length < 6)
-                              return context.getString(
-                                  LocaleKeys.ERROR_VALIDATION_SUBJECT);
-                            else
-                              return null;
+                        // EMAIL SUBJECT INPUT
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            enabled: isFormActionsEnabled,
+                            style: inputStyle,
+                            controller: _subjectController,
+                            validator: (value) {
+                              if (value.length < 6)
+                                return context.getString(
+                                    LocaleKeys.ERROR_VALIDATION_SUBJECT);
+                              else
+                                return null;
+                            },
+                            decoration: InputDecoration(
+                                labelStyle: labelStyle,
+                                labelText: context
+                                    .getString(LocaleKeys.EMAIL_SUBJECT)),
+                          ),
+                        ),
+                        // EMAIL BODY INPUT
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: TextFormField(
+                            enabled: isFormActionsEnabled,
+                            style: inputStyle,
+                            controller: _bodyController,
+                            validator: (value) {
+                              if (value.length < 20)
+                                return context.getString(
+                                    LocaleKeys.ERROR_VALIDATION_MESSAGE);
+                              else
+                                return null;
+                            },
+                            maxLines: 10,
+                            decoration: InputDecoration(
+                                labelStyle: labelStyle,
+                                labelText: context
+                                    .getString(LocaleKeys.EMAIL_MESSAGE)),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        // Circular progress indicator to control
+                        Visibility(
+                          visible: snapshot.hasData ? snapshot.data : false,
+                          child: SizedBox(
+                            width: AppCustomDimensions.CIRCULAR_INDICATOR_WIDTH,
+                            height:
+                                AppCustomDimensions.CIRCULAR_INDICATOR_HEIGHT,
+                            child: AppCustomWidgets.circularProgressIndicator(
+                                Theme.of(context).indicatorColor),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        FlatButton(
+                          onPressed: () {
+                            if (_formKey.currentState.validate() &&
+                                isFormActionsEnabled) _sendEmail();
                           },
-                          decoration: InputDecoration(
-                              labelStyle: labelStyle,
-                              labelText:
-                                  context.getString(LocaleKeys.EMAIL_SUBJECT)),
-                        ),
-                      ),
-                      // EMAIL BODY INPUT
-                      Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: TextFormField(
-                          enabled: isFormActionsEnabled,
-                          style: inputStyle,
-                          controller: _bodyController,
-                          validator: (value) {
-                            if (value.length < 20)
-                              return context.getString(
-                                  LocaleKeys.ERROR_VALIDATION_MESSAGE);
-                            else
-                              return null;
-                          },
-                          maxLines: 10,
-                          decoration: InputDecoration(
-                              labelStyle: labelStyle,
-                              labelText:
-                                  context.getString(LocaleKeys.EMAIL_MESSAGE)),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      // Circular progress indicator to control
-                      Visibility(
-                        visible: snapshot.hasData ? snapshot.data : false,
-                        child: SizedBox(
-                          width: AppCustomDimensions.CIRCULAR_INDICATOR_WIDTH,
-                          height: AppCustomDimensions.CIRCULAR_INDICATOR_HEIGHT,
-                          child: AppCustomWidgets.circularProgressIndicator(
-                              Theme.of(context).indicatorColor),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      FlatButton(
-                        onPressed: () {
-                          if (_formKey.currentState.validate() &&
-                              isFormActionsEnabled) _sendEmail();
-                        },
-                        child: Text(
-                          context.getString(LocaleKeys.SEND),
-                          style: Theme.of(context).textTheme.headline4,
-                        ),
-                      )
-                    ],
-                  );
-                },
+                          child: Text(
+                            context.getString(LocaleKeys.SEND),
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                        )
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ),

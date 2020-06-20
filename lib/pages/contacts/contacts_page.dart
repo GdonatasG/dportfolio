@@ -7,12 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:dportfolio/appData/app_data_export.dart';
 
 class ContactsPage extends StatefulWidget {
+  ContactsPage({Key key}) : super(key: key);
   @override
   _ContactsPageState createState() => _ContactsPageState();
 }
 
 class _ContactsPageState extends State<ContactsPage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   int tabItemCount = 2;
   TabController _tabController;
 
@@ -24,39 +25,42 @@ class _ContactsPageState extends State<ContactsPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          context.getString(LocaleKeys.GET_IN_TOUCH),
-          style: Theme.of(context).textTheme.headline5,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            context.getString(LocaleKeys.GET_IN_TOUCH),
+            style: Theme.of(context).textTheme.headline5,
+          ),
+          bottom: TabBar(
+            labelStyle: Theme.of(context).textTheme.headline4.copyWith(
+                fontSize: AppCustomDimensions.TAB_BAR_ITEM_TITLE_SIZE),
+            unselectedLabelStyle: Theme.of(context)
+                .textTheme
+                .headline4
+                .copyWith(
+                    fontSize: AppCustomDimensions.TAB_BAR_ITEM_TITLE_SIZE),
+            tabs: [
+              // email page tab
+              Tab(
+                  text:
+                      context.getString(LocaleKeys.TAB_EMAIL_ME).toUpperCase()),
+              // other platforms page tab
+              Tab(
+                text: context
+                    .getString(LocaleKeys.TAB_OTHER_PLATFORMS)
+                    .toUpperCase(),
+              ),
+            ],
+            controller: _tabController,
+          ),
         ),
-        bottom: TabBar(
-          labelStyle: Theme.of(context)
-              .textTheme
-              .headline4
-              .copyWith(fontSize: AppCustomDimensions.TAB_BAR_ITEM_TITLE_SIZE),
-          unselectedLabelStyle: Theme.of(context)
-              .textTheme
-              .headline4
-              .copyWith(fontSize: AppCustomDimensions.TAB_BAR_ITEM_TITLE_SIZE),
-          tabs: [
-            // email page tab
-            Tab(text: context.getString(LocaleKeys.TAB_EMAIL_ME).toUpperCase()),
-            // other platforms page tab
-            Tab(
-              text: context
-                  .getString(LocaleKeys.TAB_OTHER_PLATFORMS)
-                  .toUpperCase(),
-            ),
-          ],
+        body: TabBarView(
           controller: _tabController,
+          children: [EmailPage(), OtherPlatformsPage()],
         ),
-      ),
-      body: TabBarView(
-        controller: _tabController,
-        children: [EmailPage(), OtherPlatformsPage()],
       ),
     );
   }
@@ -66,4 +70,7 @@ class _ContactsPageState extends State<ContactsPage>
     _tabController.dispose();
     super.dispose();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

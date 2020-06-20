@@ -34,8 +34,17 @@ dependencies:
   url_launcher: ^5.4.10
   flutter_sticky_header: ^0.4.2
   timeline_list: ^0.0.5
+  # custom icons
+  flutter_icons: ^1.1.0
+  built_value: ^7.1.0
+  chopper: ^3.0.3
+  equatable: ^1.2.0
+
 
 dev_dependencies:
+  built_value_generator: ^7.1.0
+  chopper_generator: ^3.0.5
+  build_runner: ^1.10.0
   flutter_test:
     sdk: flutter
 
@@ -70,6 +79,9 @@ flutter:
     - family: Billabong
       fonts:
         - asset: fonts/Billabong.ttf
+    - family: ComicSansMs
+      fonts:
+        - asset: fonts/comic_sans_ms.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

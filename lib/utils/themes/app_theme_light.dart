@@ -1,4 +1,5 @@
 import 'package:dportfolio/utils/themes/app_colors.dart';
+import 'package:dportfolio/utils/themes/app_custom_dimensions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,8 +15,8 @@ final ThemeData appThemeLight = ThemeData(
     indicatorColor: AppColors.greetingBackground,
     textTheme: TextTheme(
         subtitle1: TextStyle(
-            fontFamily: "Billabong",
-            fontSize: 21,
+            fontFamily: "ComicSansMs",
+            fontSize: 15.5,
             color: AppColors.textColorDark),
         headline5: TextStyle(
             fontFamily: "Billabong",
@@ -32,16 +33,18 @@ final ThemeData appThemeLight = ThemeData(
         headline4: TextStyle(
             fontFamily: "Roboto", fontSize: 14, color: AppColors.textColorDark),
         headline6: TextStyle(
-            fontFamily: "Billabong",
-            fontSize: 20,
+            fontFamily: "ComicSansMs",
+            fontSize: 15,
             color: AppColors.greetingBackground,
             fontStyle: FontStyle.italic)),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,
         unselectedItemColor: AppColors.textColorDark,
         selectedItemColor: AppColors.greetingBackground,
-        unselectedIconTheme: IconThemeData(size: 22),
-        selectedIconTheme: IconThemeData(size: 22)),
+        unselectedIconTheme: IconThemeData(
+            size: AppCustomDimensions.BOTTOM_BAR_ITEM_Icon_SIZE_UNSELECTED),
+        selectedIconTheme: IconThemeData(
+            size: AppCustomDimensions.BOTTOM_BAR_ITEM_Icon_SIZE_SELECTED)),
     tabBarTheme: TabBarTheme(
         labelColor: AppColors.greetingBackground,
         unselectedLabelColor: AppColors.textColorDark),

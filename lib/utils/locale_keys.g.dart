@@ -88,4 +88,9 @@ abstract class LocaleKeys {
       "aboutMePage.timeline.university_education_name";
   static const UNIVERSITY_EDUCATION_LOCATION =
       "aboutMePage.timeline.university_education_location";
+
+  // github page
+  static const PUBLIC_REPOS = "githubPage.public_repos";
+  static const EMPTY_LIST = "githubPage.list_empty";
+  static const VISIT_PROFILE = "githubPage.visit_profile";
 }

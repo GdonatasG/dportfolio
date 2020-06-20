@@ -10,11 +10,13 @@ import 'package:preferences/preferences.dart';
 import 'package:dportfolio/appData/app_data_export.dart';
 
 class SettingsPage extends StatefulWidget {
+  SettingsPage({Key key}) : super(key: key);
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SettingsPageState extends State<SettingsPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
@@ -113,6 +115,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   _itemTitle(String title) {
     return Container(
+      padding: EdgeInsets.only(bottom: 5),
       child: PreferenceTitle(
         title,
         style: Theme.of(context).textTheme.headline6,
@@ -134,4 +137,7 @@ class _SettingsPageState extends State<SettingsPage> {
       isSingleLine: isSingleLine,
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
