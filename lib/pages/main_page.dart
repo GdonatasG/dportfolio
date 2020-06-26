@@ -1,7 +1,6 @@
 import 'package:dportfolio/pages/about_me/about_me_page.dart';
 import 'package:dportfolio/pages/contacts/contacts_page.dart';
 import 'package:dportfolio/pages/github_page.dart';
-import 'package:dportfolio/pages/portfolio_page.dart';
 import 'package:dportfolio/utils/constants.dart';
 import 'package:dportfolio/utils/locale_keys.g.dart';
 import 'package:dportfolio/utils/themes/app_custom_dimensions.dart';
@@ -12,6 +11,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:preferences/preference_service.dart';
 
+import 'portfolio/portfolio_page.dart';
 import 'settings/settings_page.dart';
 
 class MainPage extends StatefulWidget {
@@ -93,18 +93,18 @@ class _MainPageState extends State<MainPage>
             ],
           ),
           body: GestureDetector(
-              // removing input focus when tapping outside input area
-              onTap: () {
-                FocusScopeNode currentFocus = FocusScope.of(context);
-                if (!currentFocus.hasPrimaryFocus &&
-                    currentFocus.focusedChild != null) {
-                  currentFocus.focusedChild.unfocus();
-                }
-              },
-              child: IndexedStack(
-                index: _selectedPage,
-                children: pageList,
-              )),
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus &&
+                  currentFocus.focusedChild != null) {
+                currentFocus.focusedChild.unfocus();
+              }
+            },
+            child: IndexedStack(
+              index: _selectedPage,
+              children: pageList,
+            ),
+          ),
         ),
       ),
     );

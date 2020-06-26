@@ -14,8 +14,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_sticky_header/flutter_sticky_header.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:dportfolio/appData/app_data_export.dart';
+import 'package:dportfolio/utils/extensions.dart';
 
 class GithubPage extends StatefulWidget {
   GithubPage({Key key}) : super(key: key);
@@ -55,7 +55,7 @@ class _GithubPageState extends State<GithubPage>
           bloc: _githubPageBloc,
           listener: (_, state) {
             if (state is GithubLoadingError) {
-              if (isRefreshing) _showErrorSnackbar(context);
+              if (isRefreshing) showErrorSnackbar(_scaffoldKey);
               _reInitRefresher();
             }
           },
@@ -111,12 +111,6 @@ class _GithubPageState extends State<GithubPage>
     return _refreshCompleter.future;
   }
 
-  _showErrorSnackbar(BuildContext context) =>
-      _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text(
-        context.getString(LocaleKeys.SENDING_ERROR),
-      )));
-
   _buildPageLayout(BuildContext context) {
     return RefreshIndicator(
       onRefresh: _onPageRefresh,
@@ -162,7 +156,8 @@ class _GithubPageState extends State<GithubPage>
                     height: 10,
                   ),
                   FlatButton(
-                    onPressed: () => _visitPage(_githubUser.html_url),
+                    onPressed: () =>
+                        visitPage(_scaffoldKey, _githubUser.html_url),
                     child: Text(
                       context.getString(LocaleKeys.VISIT_PROFILE),
                       style: Theme.of(context).textTheme.headline4,
@@ -225,7 +220,7 @@ class _GithubPageState extends State<GithubPage>
         trailing: IconTheme(
             data: Theme.of(context).iconTheme,
             child: Icon(Icons.arrow_forward)),
-        onTap: () => _visitPage(repo.html_url),
+        onTap: () => visitPage(_scaffoldKey, repo.html_url),
       );
 
   _buildEmptyReposListMessage() => SliverFillRemaining(
@@ -292,17 +287,6 @@ class _GithubPageState extends State<GithubPage>
           ),
         ),
       );
-
-  _visitPage(String url) async {
-    if (await canLaunch(url)) {
-      await launch(
-        url,
-        enableJavaScript: true,
-      );
-    } else {
-      _showErrorSnackbar(context);
-    }
-  }
 
   @override
   bool get wantKeepAlive => true;

@@ -45,4 +45,8 @@ class Constants {
   //GITHUB
   static const TITLE_GITHUB = "GitHub";
   static const GITHUB_NAME = "gdonatasg";
+
+  // portfolio
+  static const TITLE_GOOGLE_PLAY = "Google Play";
+  static const TITLE_APP_STORE = "iOS App Store";
 }

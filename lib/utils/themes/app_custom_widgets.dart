@@ -1,7 +1,5 @@
-import 'package:dportfolio/utils/locale_keys.g.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dportfolio/appData/app_data_export.dart';
 
 import '../constants.dart';
 import 'app_colors.dart';
@@ -30,12 +28,29 @@ class AppCustomWidgets {
   }
 
   static stickyHeaderLayout(
-          {@required String title, @required BuildContext context}) =>
+          {@required String title,
+          bool centerTitle = false,
+          @required BuildContext context}) =>
       Container(
           color: Theme.of(context).primaryColorDark,
           padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
           child: Text(
             title,
+            textAlign: centerTitle ? TextAlign.center : TextAlign.start,
             style: Theme.of(context).textTheme.subtitle1,
           ));
+
+  static backgroundedTag({
+    @required Color bgColor,
+    @required Text textTag,
+  }) =>
+      Container(
+        padding: EdgeInsets.all(5),
+        margin: EdgeInsets.all(5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          color: bgColor,
+        ),
+        child: textTag,
+      );
 }
