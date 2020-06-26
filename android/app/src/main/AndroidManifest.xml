@@ -10,7 +10,7 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="dportfolio"
+        android:label="D.Portfolio"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

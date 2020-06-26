@@ -11,6 +11,7 @@ import 'package:dportfolio/appData/app_data_export.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key}) : super(key: key);
+
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
@@ -103,6 +104,7 @@ class _SettingsPageState extends State<SettingsPage>
           trailing: IconTheme(
               data: Theme.of(context).iconTheme,
               child: Icon(Icons.arrow_forward)), onTap: () {
+        FocusManager.instance.primaryFocus.unfocus();
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => LanguagePage(
                   title: context.getString(LocaleKeys.LANGUAGE),

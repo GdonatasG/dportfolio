@@ -13,6 +13,7 @@ import 'package:dportfolio/appData/app_data_extensions.dart';
 
 class AboutMePage extends StatefulWidget {
   AboutMePage({Key key}) : super(key: key);
+
   @override
   _AboutMePageState createState() => _AboutMePageState();
 }
@@ -186,25 +187,35 @@ class _AboutMePageState extends State<AboutMePage>
     );
   }
 
+  final List<String> listOfSkills = [
+    "Flutter",
+    "Kotlin",
+    "Java",
+    "Google Maps API",
+    "Google Firebase",
+    "Github"
+  ];
+
   _skillsLayout() {
     return SliverStickyHeader(
       header: AppCustomWidgets.stickyHeaderLayout(
           title: context.getString(LocaleKeys.TITLE_SKILLS), context: context),
       sliver: new SliverList(
         delegate: new SliverChildBuilderDelegate(
-            (context, i) => Column(
-                  children: [
-                    Wrap(
-                      children: [
-                        _contentTextWidget("Flutter"),
-                        _contentTextWidget("Kotlin"),
-                        _contentTextWidget("Java"),
-                        _contentTextWidget("Google Maps API"),
-                        _contentTextWidget("Google Firebase"),
-                        _contentTextWidget("Github"),
-                      ],
-                    ),
-                  ],
+            (context, i) => Wrap(
+                alignment: WrapAlignment.center,
+                children: List.generate(
+                    listOfSkills.length,
+                    (index) => AppCustomWidgets.backgroundedTag(
+                        bgColor: Theme.of(context).primaryColorDark,
+                        textTag: Text(listOfSkills[index],
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline4))) /*listOfSkills.map((skill) =>
+              AppCustomWidgets.backgroundedTag(
+                  bgColor: Theme.of(context).primaryColorDark,
+                  textTag: Text(skill,
+                      style: Theme.of(context).textTheme.headline4))),*/
                 ),
             childCount: 1),
       ),

@@ -70,6 +70,7 @@ abstract class LocaleKeys {
 
   // education timeline
   static const TITLE_EDUCATION = "aboutMePage.title_education";
+
   // education timeline items
   static const SECONDARY_EDUCATION_TIME =
       "aboutMePage.timeline.secondary_education_time";
@@ -93,4 +94,9 @@ abstract class LocaleKeys {
   static const PUBLIC_REPOS = "githubPage.public_repos";
   static const EMPTY_LIST = "githubPage.list_empty";
   static const VISIT_PROFILE = "githubPage.visit_profile";
+
+  // portfolio page
+  static const DPORTFOLIO_ABOUT = "portfolioPage.dportfolio_about";
+  static const PICTURES = "portfolioPage.pictures";
+  static const PAGE = "portfolioPage.webpage";
 }

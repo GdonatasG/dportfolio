@@ -1,10 +1,8 @@
 import 'package:dportfolio/utils/constants.dart';
-import 'package:dportfolio/utils/locale_keys.g.dart';
+import 'package:dportfolio/utils/extensions.dart';
 import 'package:dportfolio/utils/themes/app_colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dportfolio/appData/app_data_export.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class OtherPlatformsPage extends StatefulWidget {
   @override
@@ -73,19 +71,7 @@ class _OtherPlatformsPageState extends State<OtherPlatformsPage>
           String title,
           String pageUrl}) =>
       GestureDetector(
-        onTap: () async {
-          if (await canLaunch(pageUrl)) {
-            await launch(
-              pageUrl,
-              enableJavaScript: true,
-            );
-          } else {
-            _scaffoldKey.currentState.showSnackBar(SnackBar(
-                content: Text(
-              context.getString(LocaleKeys.SENDING_ERROR),
-            )));
-          }
-        },
+        onTap: () => visitPage(_scaffoldKey, pageUrl),
         child: Container(
           color: bgColor,
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),

@@ -81,5 +81,10 @@
     "public_repos": "{repos} Viešos saugyklos",
     "list_empty": "Sąrašas tuščias",
     "visit_profile": "Aplankyti profilį"
+  },
+  "portfolioPage": {
+    "dportfolio_about": "Ši aplikacija buvo sukurta 2020 metais su tikslu reprezentuoti save kaip mobilių aplikacijų kūrėją. Naudojantis ir skaitant D.Portfolio galima plačiau susipažinti su manimi bei peržiūrėti mano atliktus darbus. D.Portfolio aplikacijoje panaudoti tokie dalykai kaip \"Splash screen\", Apatinė meniu juosta su skirtingais puslapiais, skirtingos kalbos, išvaizdos temos ir kiti dalykai.",
+    "pictures": "Nuotraukos",
+    "webpage": "Puslapis"
   }
 }

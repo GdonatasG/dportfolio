@@ -45,8 +45,6 @@ class _ApplicationState extends State<Application> {
   final GithubRepositoryImpl githubRepositoryImpl =
       GithubRepositoryImpl(githubService: githubService);
 
-  MainPage mainPage;
-
   @override
   void initState() {
     _greetingDataBloc = GreetingDataBloc(
@@ -93,7 +91,7 @@ class _ApplicationState extends State<Application> {
   _setStartingPage(BuildContext context) {
     bool showGreeting =
         PrefService.getBool(Constants.PREFERENCE_SHOW_GREETING) ?? true;
-    return showGreeting ? _buildGreetingLayout(context) : mainPage;
+    return showGreeting ? _buildGreetingLayout(context) : MainPage();
   }
 
   _setStartingTheme() {
