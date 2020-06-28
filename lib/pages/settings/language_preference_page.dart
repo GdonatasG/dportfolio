@@ -1,4 +1,5 @@
 import 'package:dportfolio/utils/constants.dart';
+import 'package:dportfolio/utils/customPreferences/custom_radio_preference.dart';
 import 'package:dportfolio/utils/extensions.dart';
 import 'package:dportfolio/utils/locale_keys.g.dart';
 import 'package:dportfolio/appData/app_data_export.dart';
@@ -26,7 +27,7 @@ class _LanguagePageState extends State<LanguagePage> {
           title: Text(widget.title),
         ),
         body: PreferencePage([
-          RadioPreference(
+          CustomRadioPreference(
             Text(
               context.getString(LocaleKeys.LANGUAGE_ENGLISH),
               style: Theme.of(context).textTheme.headline4,
@@ -39,7 +40,7 @@ class _LanguagePageState extends State<LanguagePage> {
             },
           ),
           Divider(),
-          RadioPreference(
+          CustomRadioPreference(
             Text(context.getString(LocaleKeys.LANGUAGE_LITHUANIAN),
                 style: Theme.of(context).textTheme.headline4),
             Constants.LANG_LT,

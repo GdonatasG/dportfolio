@@ -39,14 +39,6 @@ final ThemeData appThemeDark = ThemeData(
             fontSize: 15,
             color: AppColors.textColorBlue,
             fontStyle: FontStyle.italic)),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
-        type: BottomNavigationBarType.fixed,
-        unselectedItemColor: AppColors.textColorLight,
-        selectedItemColor: AppColors.textColorBlue,
-        unselectedIconTheme: IconThemeData(
-            size: AppCustomDimensions.BOTTOM_BAR_ITEM_Icon_SIZE_UNSELECTED),
-        selectedIconTheme: IconThemeData(
-            size: AppCustomDimensions.BOTTOM_BAR_ITEM_Icon_SIZE_SELECTED)),
     tabBarTheme: TabBarTheme(
         labelColor: AppColors.textColorBlue,
         unselectedLabelColor: AppColors.textColorLight),

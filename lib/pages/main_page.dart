@@ -48,6 +48,13 @@ class _MainPageState extends State<MainPage>
         child: Scaffold(
           backgroundColor: Theme.of(context).backgroundColor,
           bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            unselectedItemColor: Theme.of(context).unselectedWidgetColor,
+            selectedItemColor: Theme.of(context).accentColor,
+            unselectedIconTheme: IconThemeData(
+                size: AppCustomDimensions.BOTTOM_BAR_ITEM_Icon_SIZE_UNSELECTED),
+            selectedIconTheme: IconThemeData(
+                size: AppCustomDimensions.BOTTOM_BAR_ITEM_Icon_SIZE_SELECTED),
             backgroundColor: Theme.of(context).primaryColor,
             showUnselectedLabels: true,
             currentIndex: _selectedPage,

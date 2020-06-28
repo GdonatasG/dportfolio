@@ -1,5 +1,7 @@
 import 'package:dportfolio/pages/settings/language_preference_page.dart';
 import 'package:dportfolio/utils/constants.dart';
+import 'package:dportfolio/utils/customPreferences/custom_preference_text.dart';
+import 'package:dportfolio/utils/customPreferences/custom_radio_preference.dart';
 import 'package:dportfolio/utils/locale_keys.g.dart';
 import 'package:dportfolio/utils/themes/app_theme_dark.dart';
 import 'package:dportfolio/utils/themes/app_theme_light.dart';
@@ -70,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage>
       Divider(),
       _itemTitle(context.getString(LocaleKeys.PERSONALIZATION)),
       Divider(),
-      RadioPreference(
+      CustomRadioPreference(
         Text(context.getString(LocaleKeys.THEME_LIGHT),
             style: Theme.of(context).textTheme.headline4),
         Constants.PREFERENCES_UI_THEME_LIGHT,
@@ -83,7 +85,7 @@ class _SettingsPageState extends State<SettingsPage>
         },
       ),
       Divider(),
-      RadioPreference(
+      CustomRadioPreference(
         Text(context.getString(LocaleKeys.THEME_DARK),
             style: Theme.of(context).textTheme.headline4),
         Constants.PREFERENCES_UI_THEME_DARK,
@@ -130,7 +132,7 @@ class _SettingsPageState extends State<SettingsPage>
       Widget trailing,
       Function onTap,
       bool isSingleLine = true}) {
-    return PreferenceText(
+    return CustomPreferenceText(
       text,
       style: Theme.of(context).textTheme.headline4,
       leading: leading,
