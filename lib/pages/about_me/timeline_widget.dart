@@ -1,7 +1,7 @@
 import 'package:dportfolio/pages/about_me/TimelineData.dart';
+import 'package:dportfolio/utils/timeline/timeline.dart';
+import 'package:dportfolio/utils/timeline/timeline_model.dart';
 import 'package:flutter/material.dart';
-import 'package:timeline_list/timeline.dart';
-import 'package:timeline_list/timeline_model.dart';
 import 'package:dportfolio/appData/app_data_extensions.dart';
 
 class TimelineWidget extends StatelessWidget {
