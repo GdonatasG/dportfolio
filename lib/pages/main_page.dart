@@ -44,73 +44,68 @@ class _MainPageState extends State<MainPage>
         statusBarIconBrightness: _getStatusBarIconBrightness()));
     return WillPopScope(
       onWillPop: _onBackPressed,
-      child: SafeArea(
-        child: Scaffold(
-          backgroundColor: Theme.of(context).backgroundColor,
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            unselectedItemColor: Theme.of(context).unselectedWidgetColor,
-            selectedItemColor: Theme.of(context).accentColor,
-            unselectedIconTheme: IconThemeData(
-                size: AppCustomDimensions.BOTTOM_BAR_ITEM_Icon_SIZE_UNSELECTED),
-            selectedIconTheme: IconThemeData(
-                size: AppCustomDimensions.BOTTOM_BAR_ITEM_Icon_SIZE_SELECTED),
-            backgroundColor: Theme.of(context).primaryColor,
-            showUnselectedLabels: true,
-            currentIndex: _selectedPage,
-            selectedLabelStyle: Theme.of(context).textTheme.headline4.copyWith(
-                fontSize: AppCustomDimensions.BOTTOM_BAR_ITEM_TITLE_SIZE),
-            unselectedLabelStyle: Theme.of(context)
-                .textTheme
-                .headline4
-                .copyWith(
-                    fontSize: AppCustomDimensions.BOTTOM_BAR_ITEM_TITLE_SIZE),
-            onTap: _onItemTapped,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(FontAwesome5.user),
-                title: Text(
-                  context.getString(LocaleKeys.PAGE_TITLE_ABOUT),
-                ),
+      child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          unselectedItemColor: Theme.of(context).unselectedWidgetColor,
+          selectedItemColor: Theme.of(context).accentColor,
+          unselectedIconTheme: IconThemeData(
+              size: AppCustomDimensions.BOTTOM_BAR_ITEM_Icon_SIZE_UNSELECTED),
+          selectedIconTheme: IconThemeData(
+              size: AppCustomDimensions.BOTTOM_BAR_ITEM_Icon_SIZE_SELECTED),
+          backgroundColor: Theme.of(context).primaryColor,
+          showUnselectedLabels: true,
+          currentIndex: _selectedPage,
+          selectedLabelStyle: Theme.of(context).textTheme.headline4.copyWith(
+              fontSize: AppCustomDimensions.BOTTOM_BAR_ITEM_TITLE_SIZE),
+          unselectedLabelStyle: Theme.of(context).textTheme.headline4.copyWith(
+              fontSize: AppCustomDimensions.BOTTOM_BAR_ITEM_TITLE_SIZE),
+          onTap: _onItemTapped,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesome5.user),
+              title: Text(
+                context.getString(LocaleKeys.PAGE_TITLE_ABOUT),
               ),
-              BottomNavigationBarItem(
-                icon: Icon(FontAwesome5.file_code),
-                title: Text(
-                  context.getString(LocaleKeys.PAGE_TITLE_PORTFOLIO),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(FontAwesome5.envelope),
-                title: Text(
-                  context.getString(LocaleKeys.PAGE_TITLE_CONTACT),
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(FontAwesome.github),
-                title: Text(
-                  Constants.TITLE_GITHUB,
-                ),
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(FontAwesome.cog),
-                title: Text(
-                  context.getString(LocaleKeys.PAGE_TITLE_SETTINGS),
-                ),
-              ),
-            ],
-          ),
-          body: GestureDetector(
-            onTap: () {
-              FocusScopeNode currentFocus = FocusScope.of(context);
-              if (!currentFocus.hasPrimaryFocus &&
-                  currentFocus.focusedChild != null) {
-                currentFocus.focusedChild.unfocus();
-              }
-            },
-            child: IndexedStack(
-              index: _selectedPage,
-              children: pageList,
             ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesome5.file_code),
+              title: Text(
+                context.getString(LocaleKeys.PAGE_TITLE_PORTFOLIO),
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesome5.envelope),
+              title: Text(
+                context.getString(LocaleKeys.PAGE_TITLE_CONTACT),
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesome.github),
+              title: Text(
+                Constants.TITLE_GITHUB,
+              ),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(FontAwesome.cog),
+              title: Text(
+                context.getString(LocaleKeys.PAGE_TITLE_SETTINGS),
+              ),
+            ),
+          ],
+        ),
+        body: GestureDetector(
+          onTap: () {
+            FocusScopeNode currentFocus = FocusScope.of(context);
+            if (!currentFocus.hasPrimaryFocus &&
+                currentFocus.focusedChild != null) {
+              currentFocus.focusedChild.unfocus();
+            }
+          },
+          child: IndexedStack(
+            index: _selectedPage,
+            children: pageList,
           ),
         ),
       ),

@@ -25,39 +25,38 @@ class _ContactsPageState extends State<ContactsPage>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            context.getString(LocaleKeys.GET_IN_TOUCH),
-            style: Theme.of(context).textTheme.headline5,
-          ),
-          bottom: TabBar(
-            labelStyle: Theme.of(context).textTheme.headline4.copyWith(
-                fontSize: AppCustomDimensions.TAB_BAR_ITEM_TITLE_SIZE),
-            unselectedLabelStyle: Theme.of(context)
-                .textTheme
-                .headline4
-                .copyWith(
-                    fontSize: AppCustomDimensions.TAB_BAR_ITEM_TITLE_SIZE),
-            tabs: [
-              // email page tab
-              Tab(
-                  text:
-                      context.getString(LocaleKeys.TAB_EMAIL_ME).toUpperCase()),
-              // other platforms page tab
-              Tab(
-                text: context
-                    .getString(LocaleKeys.TAB_OTHER_PLATFORMS)
-                    .toUpperCase(),
-              ),
-            ],
-            controller: _tabController,
-          ),
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          context.getString(LocaleKeys.GET_IN_TOUCH),
+          style: Theme.of(context).textTheme.headline5,
         ),
-        body: TabBarView(
+        bottom: TabBar(
+          labelStyle: Theme.of(context)
+              .textTheme
+              .headline4
+              .copyWith(fontSize: AppCustomDimensions.TAB_BAR_ITEM_TITLE_SIZE),
+          unselectedLabelStyle: Theme.of(context)
+              .textTheme
+              .headline4
+              .copyWith(fontSize: AppCustomDimensions.TAB_BAR_ITEM_TITLE_SIZE),
+          tabs: [
+            // email page tab
+            Tab(text: context.getString(LocaleKeys.TAB_EMAIL_ME).toUpperCase()),
+            // other platforms page tab
+            Tab(
+              text: context
+                  .getString(LocaleKeys.TAB_OTHER_PLATFORMS)
+                  .toUpperCase(),
+            ),
+          ],
+          controller: _tabController,
+        ),
+      ),
+      body: SafeArea(
+        child: TabBarView(
           controller: _tabController,
           children: [EmailPage(), OtherPlatformsPage()],
         ),

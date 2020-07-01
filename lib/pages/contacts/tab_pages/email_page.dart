@@ -47,23 +47,21 @@ class _EmailPageState extends State<EmailPage>
   }
 
   _buildData(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        key: _scaffoldKey,
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: BlocListener<EmailTabBloc, EmailTabState>(
+    return Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: BlocListener<EmailTabBloc, EmailTabState>(
+          bloc: _emailTabBloc,
+          listener: (_, state) {
+            if (state is EmailSendingError) showErrorSnackbar(_scaffoldKey);
+          },
+          child: BlocBuilder<EmailTabBloc, EmailTabState>(
             bloc: _emailTabBloc,
-            listener: (_, state) {
-              if (state is EmailSendingError) showErrorSnackbar(_scaffoldKey);
+            builder: (_, state) {
+              if (state is EmailSent) _clearInputs();
+              return _buildPage(context);
             },
-            child: BlocBuilder<EmailTabBloc, EmailTabState>(
-              bloc: _emailTabBloc,
-              builder: (_, state) {
-                if (state is EmailSent) _clearInputs();
-                return _buildPage(context);
-              },
-            )),
-      ),
+          )),
     );
   }
 
