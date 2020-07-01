@@ -78,9 +78,7 @@ class _ApplicationState extends State<Application> {
                   debugShowCheckedModeBanner: false,
                   title: Constants.APP_NAME,
                   theme: theme,
-                  home: SafeArea(
-                    child: Scaffold(body: _setStartingPage(context)),
-                  ),
+                  home: Scaffold(body: _setStartingPage(context)),
                 );
               });
         },
@@ -104,32 +102,34 @@ class _ApplicationState extends State<Application> {
   }
 
   _showErrorLayout(BuildContext context) {
-    return Container(
-      color: AppColors.greetingBackground,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              context.getString(LocaleKeys.DATA_LOADING_ERROR),
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            // data reload button
-            FlatButton(
-              shape: AppCustomWidgets.customLightShapeForFlatButton(),
-              textColor: AppColors.lightestGrey,
-              onPressed: () {
-                _greetingDataBloc.add(GetGreetingMessage());
-              },
-              child: Text(
-                context.getString(LocaleKeys.TRY_AGAIN_TEXT),
-                style: greetingTheme.textTheme.headline3,
+    return SafeArea(
+      child: Container(
+        color: AppColors.greetingBackground,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                context.getString(LocaleKeys.DATA_LOADING_ERROR),
+                style: Theme.of(context).textTheme.headline4,
               ),
-            )
-          ],
+              SizedBox(
+                height: 10,
+              ),
+              // data reload button
+              FlatButton(
+                shape: AppCustomWidgets.customLightShapeForFlatButton(),
+                textColor: AppColors.lightestGrey,
+                onPressed: () {
+                  _greetingDataBloc.add(GetGreetingMessage());
+                },
+                child: Text(
+                  context.getString(LocaleKeys.TRY_AGAIN_TEXT),
+                  style: greetingTheme.textTheme.headline3,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -194,11 +194,13 @@ class _ApplicationState extends State<Application> {
   }
 
   _showLoadingLayout() {
-    return Container(
-      color: AppColors.greetingBackground,
-      child: Center(
-        child: AppCustomWidgets.circularProgressIndicator(
-            greetingTheme.indicatorColor),
+    return SafeArea(
+      child: Container(
+        color: AppColors.greetingBackground,
+        child: Center(
+          child: AppCustomWidgets.circularProgressIndicator(
+              greetingTheme.indicatorColor),
+        ),
       ),
     );
   }

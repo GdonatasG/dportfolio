@@ -47,53 +47,51 @@ class _GithubPageState extends State<GithubPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        key: _scaffoldKey,
-        body: BlocListener<GithubPageBloc, GithubPageState>(
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      key: _scaffoldKey,
+      body: BlocListener<GithubPageBloc, GithubPageState>(
+        bloc: _githubPageBloc,
+        listener: (_, state) {
+          if (state is GithubLoadingError) {
+            if (isRefreshing) showErrorSnackbar(_scaffoldKey);
+            _reInitRefresher();
+          }
+        },
+        child: BlocBuilder<GithubPageBloc, GithubPageState>(
           bloc: _githubPageBloc,
-          listener: (_, state) {
-            if (state is GithubLoadingError) {
-              if (isRefreshing) showErrorSnackbar(_scaffoldKey);
-              _reInitRefresher();
-            }
-          },
-          child: BlocBuilder<GithubPageBloc, GithubPageState>(
-            bloc: _githubPageBloc,
-            builder: (_, state) {
-              if (state is GithubDataLoading) {
-                if (isRefreshing || isInitialized) {
-                  return _buildPageLayout(context);
-                } else
-                  return _showLoadingLayout(context);
-              } else if (state is GithubLoadingError) {
-                if (isRefreshing || isInitialized) {
-                  isRefreshing = false;
-                  return _buildPageLayout(context);
-                } else
-                  return _showLoadingErrorLayout(context, state.error);
-              } else if (state is GithubUserLoaded) {
-                this._githubUser = state.githubUser;
-                _githubPageBloc.add(GetGithubUserRepos(_githubUser.login));
-                return isRefreshing
-                    ? _buildPageLayout(context)
-                    : _showLoadingLayout(context);
-              }
-
-              /// this state appears if Github User is loaded and his repos is loaded
-              else if (state is GithubReposLoaded) {
-                // data initialize completed
-                // can show user and repos data
-                isInitialized = true;
-                _reInitRefresher();
-                isRefreshing = false;
-                this._githubRepos = state.githubRepos;
+          builder: (_, state) {
+            if (state is GithubDataLoading) {
+              if (isRefreshing || isInitialized) {
                 return _buildPageLayout(context);
-              }
-              return Center();
-            },
-          ),
+              } else
+                return _showLoadingLayout(context);
+            } else if (state is GithubLoadingError) {
+              if (isRefreshing || isInitialized) {
+                isRefreshing = false;
+                return _buildPageLayout(context);
+              } else
+                return _showLoadingErrorLayout(context, state.error);
+            } else if (state is GithubUserLoaded) {
+              this._githubUser = state.githubUser;
+              _githubPageBloc.add(GetGithubUserRepos(_githubUser.login));
+              return isRefreshing
+                  ? _buildPageLayout(context)
+                  : _showLoadingLayout(context);
+            }
+
+            /// this state appears if Github User is loaded and his repos is loaded
+            else if (state is GithubReposLoaded) {
+              // data initialize completed
+              // can show user and repos data
+              isInitialized = true;
+              _reInitRefresher();
+              isRefreshing = false;
+              this._githubRepos = state.githubRepos;
+              return _buildPageLayout(context);
+            }
+            return Center();
+          },
         ),
       ),
     );
@@ -248,9 +246,11 @@ class _GithubPageState extends State<GithubPage>
             style: Theme.of(context).textTheme.headline5,
           ),
         ),
-        body: Center(
-          child: AppCustomWidgets.circularProgressIndicator(
-              Theme.of(context).indicatorColor),
+        body: SafeArea(
+          child: Center(
+            child: AppCustomWidgets.circularProgressIndicator(
+                Theme.of(context).indicatorColor),
+          ),
         ),
       );
 
@@ -263,27 +263,29 @@ class _GithubPageState extends State<GithubPage>
             style: Theme.of(context).textTheme.headline5,
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(context.getString(LocaleKeys.DATA_LOADING_ERROR),
-                  style: Theme.of(context).textTheme.headline4),
-              SizedBox(
-                height: 10,
-              ),
-              // data reload button
-              FlatButton(
-                onPressed: () {
-                  _githubPageBloc
-                      .add(GetGithubUserByName(Constants.GITHUB_NAME));
-                },
-                child: Text(
-                  context.getString(LocaleKeys.TRY_AGAIN_TEXT),
-                  style: Theme.of(context).textTheme.headline3,
+        body: SafeArea(
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(context.getString(LocaleKeys.DATA_LOADING_ERROR),
+                    style: Theme.of(context).textTheme.headline4),
+                SizedBox(
+                  height: 10,
                 ),
-              )
-            ],
+                // data reload button
+                FlatButton(
+                  onPressed: () {
+                    _githubPageBloc
+                        .add(GetGithubUserByName(Constants.GITHUB_NAME));
+                  },
+                  child: Text(
+                    context.getString(LocaleKeys.TRY_AGAIN_TEXT),
+                    style: Theme.of(context).textTheme.headline3,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       );

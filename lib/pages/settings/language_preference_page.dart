@@ -21,13 +21,13 @@ class _LanguagePageState extends State<LanguagePage> {
   Widget build(BuildContext context) {
     // language init
     _initLanguage(context);
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: PreferencePage([
+    return Scaffold(
+      backgroundColor: Theme.of(context).backgroundColor,
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: SafeArea(
+        child: PreferencePage([
           CustomRadioPreference(
             Text(
               context.getString(LocaleKeys.LANGUAGE_ENGLISH),

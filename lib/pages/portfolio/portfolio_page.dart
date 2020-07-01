@@ -20,18 +20,19 @@ class _PortfolioPageState extends State<PortfolioPage>
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            resizeToAvoidBottomInset: false,
-            key: _scaffoldKey,
-            backgroundColor: Theme.of(context).backgroundColor,
-            appBar: AppBar(
-                centerTitle: true,
-                title: Text(
-                  Constants.APP_NAME,
-                  style: Theme.of(context).textTheme.headline5,
-                )),
-            body: _buildPortfolioPage()));
+    return Scaffold(
+        resizeToAvoidBottomInset: false,
+        key: _scaffoldKey,
+        backgroundColor: Theme.of(context).backgroundColor,
+        appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+              Constants.APP_NAME,
+              style: Theme.of(context).textTheme.headline5,
+            )),
+        body: SafeArea(
+          child: _buildPortfolioPage(),
+        ));
   }
 
   final List portfolioSliders = portfolioItems
