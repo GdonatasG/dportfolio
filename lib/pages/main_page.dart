@@ -41,7 +41,8 @@ class _MainPageState extends State<MainPage>
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarColor: Theme.of(context).primaryColor,
-        statusBarIconBrightness: _getStatusBarIconBrightness()));
+        statusBarIconBrightness: _getStatusBarIconBrightness(),
+    statusBarBrightness: _getStatusBarBrightnessForIOS()));
     return WillPopScope(
       onWillPop: _onBackPressed,
       child: Scaffold(
@@ -119,6 +120,15 @@ class _MainPageState extends State<MainPage>
     else if (currentTheme == Constants.PREFERENCES_UI_THEME_DARK)
       return Brightness.light;
     return Brightness.light;
+  }
+
+  Brightness _getStatusBarBrightnessForIOS(){
+    String currentTheme = PrefService.getString(Constants.PREFERENCE_UI_THEME);
+    if (currentTheme == Constants.PREFERENCES_UI_THEME_LIGHT)
+      return Brightness.light;
+    else if (currentTheme == Constants.PREFERENCES_UI_THEME_DARK)
+      return Brightness.dark;
+    return Brightness.dark;
   }
 
   void _onItemTapped(int index) {
