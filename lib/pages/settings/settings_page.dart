@@ -28,9 +28,14 @@ class _SettingsPageState extends State<SettingsPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: SafeArea(
-        child: _buildPreferenceSettings(context),
+      body: Container(
+        color: Theme.of(context).primaryColor,
+        child: SafeArea(
+          child: Container(
+            color: Theme.of(context).backgroundColor,
+            child: _buildPreferenceSettings(context),
+          ),
+        ),
       ),
     );
   }

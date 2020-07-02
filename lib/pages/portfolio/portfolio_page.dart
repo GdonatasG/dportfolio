@@ -21,17 +21,22 @@ class _PortfolioPageState extends State<PortfolioPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
         key: _scaffoldKey,
-        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
             centerTitle: true,
             title: Text(
               Constants.APP_NAME,
               style: Theme.of(context).textTheme.headline5,
             )),
-        body: SafeArea(
-          child: _buildPortfolioPage(),
+        body: Container(
+          color: Theme.of(context).primaryColor,
+          child: SafeArea(
+            child: Container(
+              color: Theme.of(context).backgroundColor,
+              child: _buildPortfolioPage(),
+            ),
+          ),
         ));
   }
 

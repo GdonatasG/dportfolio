@@ -48,7 +48,6 @@ class _GithubPageState extends State<GithubPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
       key: _scaffoldKey,
       body: BlocListener<GithubPageBloc, GithubPageState>(
         bloc: _githubPageBloc,
@@ -112,61 +111,69 @@ class _GithubPageState extends State<GithubPage>
   _buildPageLayout(BuildContext context) {
     return RefreshIndicator(
       onRefresh: _onPageRefresh,
-      child: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 300.0,
-            floating: false,
-            pinned: true,
-            centerTitle: true,
-            stretch: true,
-            stretchTriggerOffset: 150.0,
-            forceElevated: true,
-            // SABT - the class to show title only if FlexibleSpaceBar is already scrolled
-            title: SABT(
-              child: Text(
-                Constants.TITLE_GITHUB,
-                style: Theme.of(context).textTheme.headline5,
-              ),
-            ),
-            flexibleSpace: FlexibleSpaceBar(
-              background: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  CircleAvatar(
-                      radius: 60,
-                      backgroundColor: Theme.of(context).unselectedWidgetColor,
-                      child: CircleAvatar(
-                        radius: 58.5,
-                        backgroundImage: NetworkImage(_githubUser.avatar_url),
-                      )),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    _githubUser.login,
-                    style: Theme.of(context).textTheme.headline5,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  FlatButton(
-                    onPressed: () =>
-                        visitPage(_scaffoldKey, _githubUser.html_url),
+      child: Container(
+        color: Theme.of(context).primaryColor,
+        child: SafeArea(
+          child: Container(
+            color: Theme.of(context).backgroundColor,
+            child: CustomScrollView(
+              physics: BouncingScrollPhysics(),
+              slivers: [
+                SliverAppBar(
+                  expandedHeight: 300.0,
+                  floating: false,
+                  pinned: true,
+                  centerTitle: true,
+                  stretch: true,
+                  stretchTriggerOffset: 150.0,
+                  forceElevated: true,
+                  // SABT - the class to show title only if FlexibleSpaceBar is already scrolled
+                  title: SABT(
                     child: Text(
-                      context.getString(LocaleKeys.VISIT_PROFILE),
-                      style: Theme.of(context).textTheme.headline4,
+                      Constants.TITLE_GITHUB,
+                      style: Theme.of(context).textTheme.headline5,
                     ),
-                  )
-                ],
-              ),
+                  ),
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        CircleAvatar(
+                            radius: 60,
+                            backgroundColor: Theme.of(context).unselectedWidgetColor,
+                            child: CircleAvatar(
+                              radius: 58.5,
+                              backgroundImage: NetworkImage(_githubUser.avatar_url),
+                            )),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          _githubUser.login,
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        FlatButton(
+                          onPressed: () =>
+                              visitPage(_scaffoldKey, _githubUser.html_url),
+                          child: Text(
+                            context.getString(LocaleKeys.VISIT_PROFILE),
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                _buildGithubReposLayout(context)
+              ],
             ),
           ),
-          _buildGithubReposLayout(context)
-        ],
+        ),
       ),
     );
   }
@@ -238,7 +245,6 @@ class _GithubPageState extends State<GithubPage>
       );
 
   _showLoadingLayout(BuildContext context) => Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           centerTitle: true,
           title: Text(
@@ -246,16 +252,21 @@ class _GithubPageState extends State<GithubPage>
             style: Theme.of(context).textTheme.headline5,
           ),
         ),
-        body: SafeArea(
-          child: Center(
-            child: AppCustomWidgets.circularProgressIndicator(
-                Theme.of(context).indicatorColor),
+        body: Container(
+          color: Theme.of(context).primaryColor,
+          child: SafeArea(
+            child: Container(
+              color: Theme.of(context).backgroundColor,
+              child: Center(
+                child: AppCustomWidgets.circularProgressIndicator(
+                    Theme.of(context).indicatorColor),
+              ),
+            ),
           ),
         ),
       );
 
   _showLoadingErrorLayout(BuildContext context, String error) => Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           centerTitle: true,
           title: Text(
@@ -263,28 +274,34 @@ class _GithubPageState extends State<GithubPage>
             style: Theme.of(context).textTheme.headline5,
           ),
         ),
-        body: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(context.getString(LocaleKeys.DATA_LOADING_ERROR),
-                    style: Theme.of(context).textTheme.headline4),
-                SizedBox(
-                  height: 10,
+        body: Container(
+          color: Theme.of(context).primaryColor,
+          child: SafeArea(
+            child: Container(
+              color: Theme.of(context).backgroundColor,
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(context.getString(LocaleKeys.DATA_LOADING_ERROR),
+                        style: Theme.of(context).textTheme.headline4),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    // data reload button
+                    FlatButton(
+                      onPressed: () {
+                        _githubPageBloc
+                            .add(GetGithubUserByName(Constants.GITHUB_NAME));
+                      },
+                      child: Text(
+                        context.getString(LocaleKeys.TRY_AGAIN_TEXT),
+                        style: Theme.of(context).textTheme.headline3,
+                      ),
+                    )
+                  ],
                 ),
-                // data reload button
-                FlatButton(
-                  onPressed: () {
-                    _githubPageBloc
-                        .add(GetGithubUserByName(Constants.GITHUB_NAME));
-                  },
-                  child: Text(
-                    context.getString(LocaleKeys.TRY_AGAIN_TEXT),
-                    style: Theme.of(context).textTheme.headline3,
-                  ),
-                )
-              ],
+              ),
             ),
           ),
         ),

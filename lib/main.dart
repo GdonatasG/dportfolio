@@ -78,7 +78,7 @@ class _ApplicationState extends State<Application> {
                   debugShowCheckedModeBanner: false,
                   title: Constants.APP_NAME,
                   theme: theme,
-                  home: _setStartingPage(context),
+                  home: _setStartingPage(context)
                 );
               });
         },
@@ -136,25 +136,32 @@ class _ApplicationState extends State<Application> {
   _buildGreetingLayout(BuildContext context) {
     _greetingDataBloc.add(GetGreetingMessage());
     return Scaffold(
-      body: BlocListener<GreetingDataBloc, GreetingDataState>(
-        bloc: _greetingDataBloc,
-        listener: (context, state) {
-          // listener
-        },
-        child: BlocBuilder<GreetingDataBloc, GreetingDataState>(
-          bloc: _greetingDataBloc,
-          builder: (context, state) {
-            if (state is GreetingDataLoading)
-              return _showLoadingLayout();
-            else if (state is GreetingMessageLoaded)
-              return _showGreetingLayout(context, state.message);
-            else if (state is GreetingDataError)
-              return _showErrorLayout(context);
-            else
-              return Container(
-                color: AppColors.greetingBackground,
-              );
-          },
+      body: Container(
+        color: AppColors.greetingBackground,
+        child: SafeArea(
+          child: Container(
+            child: BlocListener<GreetingDataBloc, GreetingDataState>(
+              bloc: _greetingDataBloc,
+              listener: (context, state) {
+                // listener
+              },
+              child: BlocBuilder<GreetingDataBloc, GreetingDataState>(
+                bloc: _greetingDataBloc,
+                builder: (context, state) {
+                  if (state is GreetingDataLoading)
+                    return _showLoadingLayout();
+                  else if (state is GreetingMessageLoaded)
+                    return _showGreetingLayout(context, state.message);
+                  else if (state is GreetingDataError)
+                    return _showErrorLayout(context);
+                  else
+                    return Container(
+                      color: AppColors.greetingBackground,
+                    );
+                },
+              ),
+            ),
+          ),
         ),
       ),
     );

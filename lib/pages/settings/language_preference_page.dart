@@ -22,36 +22,41 @@ class _LanguagePageState extends State<LanguagePage> {
     // language init
     _initLanguage(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: SafeArea(
-        child: PreferencePage([
-          CustomRadioPreference(
-            Text(
-              context.getString(LocaleKeys.LANGUAGE_ENGLISH),
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            Constants.LANG_EN,
-            Constants.PREFERENCE_LANGUAGE,
-            isDefault: true,
-            onSelect: () {
-              _updateLanguage(Locale(Constants.LANG_EN), context);
-            },
+      body: Container(
+        color: Theme.of(context).primaryColor,
+        child: SafeArea(
+          child: Container(
+            color: Theme.of(context).backgroundColor,
+            child: PreferencePage([
+              CustomRadioPreference(
+                Text(
+                  context.getString(LocaleKeys.LANGUAGE_ENGLISH),
+                  style: Theme.of(context).textTheme.headline4,
+                ),
+                Constants.LANG_EN,
+                Constants.PREFERENCE_LANGUAGE,
+                isDefault: true,
+                onSelect: () {
+                  _updateLanguage(Locale(Constants.LANG_EN), context);
+                },
+              ),
+              Divider(),
+              CustomRadioPreference(
+                Text(context.getString(LocaleKeys.LANGUAGE_LITHUANIAN),
+                    style: Theme.of(context).textTheme.headline4),
+                Constants.LANG_LT,
+                Constants.PREFERENCE_LANGUAGE,
+                onSelect: () {
+                  _updateLanguage(Locale(Constants.LANG_LT), context);
+                },
+              ),
+              Divider(),
+            ]),
           ),
-          Divider(),
-          CustomRadioPreference(
-            Text(context.getString(LocaleKeys.LANGUAGE_LITHUANIAN),
-                style: Theme.of(context).textTheme.headline4),
-            Constants.LANG_LT,
-            Constants.PREFERENCE_LANGUAGE,
-            onSelect: () {
-              _updateLanguage(Locale(Constants.LANG_LT), context);
-            },
-          ),
-          Divider(),
-        ]),
+        ),
       ),
     );
   }

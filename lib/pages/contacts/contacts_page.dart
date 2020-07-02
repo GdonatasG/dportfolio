@@ -55,10 +55,15 @@ class _ContactsPageState extends State<ContactsPage>
           controller: _tabController,
         ),
       ),
-      body: SafeArea(
-        child: TabBarView(
-          controller: _tabController,
-          children: [EmailPage(), OtherPlatformsPage()],
+      body: Container(
+        color: Theme.of(context).primaryColor,
+        child: SafeArea(
+          child: Container(
+            child: TabBarView(
+              controller: _tabController,
+              children: [EmailPage(), OtherPlatformsPage()],
+            ),
+          ),
         ),
       ),
     );
