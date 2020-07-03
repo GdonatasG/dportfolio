@@ -7,6 +7,7 @@ import 'package:dportfolio/utils/themes/app_theme_dark.dart';
 import 'package:dportfolio/utils/themes/app_theme_light.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
 import 'package:preferences/preference_page.dart';
 import 'package:preferences/preferences.dart';
 import 'package:dportfolio/appData/app_data_export.dart';
@@ -20,8 +21,11 @@ class SettingsPage extends StatefulWidget {
 
 class _SettingsPageState extends State<SettingsPage>
     with AutomaticKeepAliveClientMixin {
+  String appVersion;
+
   @override
   void initState() {
+    _initAppVersion();
     super.initState();
   }
 
@@ -40,13 +44,18 @@ class _SettingsPageState extends State<SettingsPage>
     );
   }
 
+  _initAppVersion() =>
+      PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+        setState(() {
+          appVersion = packageInfo.version;
+        });
+      });
+
   _buildPreferenceSettings(BuildContext context) {
     return PreferencePage([
       _itemTitle(context.getString(LocaleKeys.ABOUT_APPLICATION)),
       Divider(),
-      _itemText(
-          context.getString(
-              LocaleKeys.VERSION, {'version': Constants.APP_VERSION}),
+      _itemText(context.getString(LocaleKeys.VERSION, {'version': appVersion}),
           leading: IconTheme(
             data: Theme.of(context).iconTheme,
             child: Icon(
