@@ -1,5 +1,6 @@
 import 'package:dportfolio/data/repository/github/github_repository_impl.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:supercharged/supercharged.dart';
 
 import 'github_page_bloc_export.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
