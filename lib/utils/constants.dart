@@ -2,7 +2,6 @@ class Constants {
   Constants._();
 
   // APP
-  static const APP_VERSION = "v1.0";
   static const APP_NAME = "D.Portfolio";
   static const APP_CREATORS = "Donatas Žitkus";
 
@@ -30,16 +29,18 @@ class Constants {
 
   // social (other platforms) profile urls
   static const TITLE_FREELANCER = "Freelancer";
-  static const URL_FREELANCER = "https://www.freelancer.com";
+  static const URL_FREELANCER = "https://www.freelancer.com/u/zitkusd";
   static const ICON_SRC_FREELANCER =
       "assets/images/platforms/icon_freelancer.png";
 
   static const TITLE_UPWORK = "Upwork";
-  static const URL_UPWORK = "https://www.upwork.com";
+  static const URL_UPWORK =
+      "https://www.upwork.com/freelancers/~01d46d21775488abb6";
   static const ICON_SRC_UPWORK = "assets/images/platforms/icon_upwork.png";
 
   static const TITLE_LINKEDIN = "LinkedIn";
-  static const URL_LINKEDIN = "https://www.linkedin.com";
+  static const URL_LINKEDIN =
+      "https://www.linkedin.com/in/donatas-%C5%BEitkus-50a4b6163/";
   static const ICON_SRC_LINKEDIN = "assets/images/platforms/icon_linkedin.png";
 
   //GITHUB
