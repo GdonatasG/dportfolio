@@ -25,86 +25,89 @@ class _AboutMePageState extends State<AboutMePage>
   Widget build(BuildContext context) {
     return Scaffold(
         body: Container(
-          color: Theme.of(context).primaryColor,
-          child: SafeArea(
-            child: Container(
-              color: Theme.of(context).backgroundColor,
-              child: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
-                SliverAppBar(
-                  expandedHeight: 300.0,
-                  floating: false,
-                  pinned: true,
-                  centerTitle: true,
-                  stretch: true,
-                  stretchTriggerOffset: 150.0,
-                  forceElevated: true,
-                  // SABT - the class to show title only if FlexibleSpaceBar is already scrolled
-                  title: SABT(
-                    child: Text(
-                      Constants.APP_NAME,
-                      style: Theme.of(context).textTheme.headline5,
-                    ),
-                  ),
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Container(
-                      child: Column(
+      color: Theme.of(context).primaryColor,
+      child: SafeArea(
+        child: Container(
+          color: Theme.of(context).backgroundColor,
+          child: CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
+            SliverAppBar(
+              expandedHeight: 300.0,
+              floating: false,
+              pinned: true,
+              centerTitle: true,
+              stretch: true,
+              stretchTriggerOffset: 150.0,
+              forceElevated: true,
+              // SABT - the class to show title only if FlexibleSpaceBar is already scrolled
+              title: SABT(
+                child: Text(
+                  Constants.APP_NAME,
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+              ),
+              flexibleSpace: FlexibleSpaceBar(
+                background: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        _getImageAssetSrcByTheme(),
+                        width: AppCustomDimensions.LOGO_FACE_WIDTH,
+                        height: AppCustomDimensions.LOGO_FACE_HEIGHT,
+                        fit: BoxFit.fill,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Donatas Žitkus",
+                        style: Theme.of(context).textTheme.headline5,
+                      ),
+                      Text(
+                        context.getString(LocaleKeys.TITLE_MOBILE_DEVELOPER),
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image.asset(
-                            _getImageAssetSrcByTheme(),
-                            width: AppCustomDimensions.LOGO_FACE_WIDTH,
-                            height: AppCustomDimensions.LOGO_FACE_HEIGHT,
-                            fit: BoxFit.fill,
+                          Icon(
+                            Icons.location_on,
+                            color: Theme.of(context).textTheme.headline5.color,
                           ),
                           SizedBox(
-                            height: 10,
+                            width: 5,
                           ),
                           Text(
-                            "Donatas Žitkus",
-                            style: Theme.of(context).textTheme.headline5,
-                          ),
-                          Text(
-                            context.getString(LocaleKeys.TITLE_MOBILE_DEVELOPER),
-                            style: Theme.of(context).textTheme.subtitle1,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.location_on,
-                                color: Theme.of(context).textTheme.headline5.color,
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                "Kaunas, " +
-                                    context.getString(LocaleKeys.COUNTRY_LITHUANIA),
-                                style: Theme.of(context).textTheme.headline5.copyWith(
+                            "Kaunas, " +
+                                context.getString(LocaleKeys.COUNTRY_LITHUANIA),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5
+                                .copyWith(
                                     fontSize: 14, fontFamily: "ComicSansMs"),
-                              )
-                            ],
                           )
                         ],
-                      ),
-                    ),
+                      )
+                    ],
                   ),
                 ),
-                _roadToProgrammingLayout(),
-                _theBeginningLayout(),
-                _universityLayout(),
-                _goalsLayout(),
-                _skillsLayout(),
-                _additionalSkillsLayout(),
-                _educationTimelineLayout()
-              ]),
+              ),
             ),
-          ),
-        ));
+            _roadToProgrammingLayout(),
+            _theBeginningLayout(),
+            _universityLayout(),
+            _goalsLayout(),
+            _skillsLayout(),
+            _additionalSkillsLayout(),
+            _educationTimelineLayout()
+          ]),
+        ),
+      ),
+    ));
   }
 
   _contentTextWidget(String content) {
@@ -196,7 +199,10 @@ class _AboutMePageState extends State<AboutMePage>
     "Java",
     "Google Maps API",
     "Google Firebase",
-    "Github"
+    "Github",
+    "Android",
+    "Android Studio",
+    "iOS",
   ];
 
   _skillsLayout() {
