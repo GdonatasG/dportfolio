@@ -35,7 +35,9 @@ const List<PortfolioItem> portfolioItems = [
         "Flutter",
         "Dart",
         "Mobile",
-        "Android", ///*"iOS"*/
+        "Android",
+
+        /*"iOS"*/
       ],
       coverUrl: "assets/images/portfolio/dportfolio/dportfolio_cover.png",
       listOfImagesUrl: [
