@@ -27,13 +27,16 @@ class PortfolioItem {
 const List<PortfolioItem> portfolioItems = [
   PortfolioItem(
       title: Constants.APP_NAME,
-
-      /// for playstore: details?id=com.test.test
-      googlePlayUrl: "https://play.google.com/store/apps/",
-      appStoreUrl: "https://apps.apple.com/us/app/temple-run-2/id572395608",
+      googlePlayUrl:
+          "https://play.google.com/store/apps/details?id=com.app.dportfolio",
       githubUrl: "https://github.com/GdonatasG/dportfolio",
       about: LocaleKeys.DPORTFOLIO_ABOUT,
-      platformsAndTechnologies: ["Flutter", "Dart", "Mobile", "Android", "iOS"],
+      platformsAndTechnologies: [
+        "Flutter",
+        "Dart",
+        "Mobile",
+        "Android", /*"iOS"*/
+      ],
       coverUrl: "assets/images/portfolio/dportfolio/dportfolio_cover.png",
       listOfImagesUrl: [
         "assets/images/portfolio/dportfolio/dportfolio1.png",
